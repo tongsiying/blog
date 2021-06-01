@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.1" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="_Sly-yzHYmALHXzjFpPWsodMrjBSphw7bfRbMUH80Qc">
+  <meta name="msvalidate.01" content="B1CFD346B8DEBBFE0C983C2AF8955531">
+  <meta name="baidu-site-verification" content="vkMTwK56xr">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="先看视频再看书">
+<meta property="og:type" content="website">
+<meta property="og:title" content="蓝蓝博客">
+<meta property="og:url" content="https://tongsiying.github.io/blog/page/6/index.html">
+<meta property="og:site_name" content="蓝蓝博客">
+<meta property="og:description" content="先看视频再看书">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="蓝蓝">
+<meta property="article:tag" content="程序员">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="读书">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="批处理">
+<meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://tongsiying.github.io/blog/page/6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>蓝蓝博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蓝蓝博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-dir">
+      
+    
+
+    <a href="/blog/dir/" rel="section"><i class="fa fa-fw fa-sitemap"></i>目录</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-links">
+      
+    
+
+    <a href="/blog/links/" rel="section"><i class="fa fa-fw fa-link"></i>链接</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/lanlan2017" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/de0d0943/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/de0d0943/" class="post-title-link" itemprop="url">Win10电脑C盘瘦身</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-05 02:10:22" itemprop="dateCreated datePublished" datetime="2021-04-05T02:10:22+08:00">2021-04-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-08 00:17:43" itemprop="dateModified" datetime="2021-04-08T00:17:43+08:00">2021-04-08</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/Windows/" itemprop="url" rel="index"><span itemprop="name">Windows</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/Windows/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/Windows/%E8%BD%AF%E4%BB%B6/Win10%E8%AE%BE%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">Win10设置</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/de0d0943/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/de0d0943/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/de0d0943/#移动用户下的目录到其他磁盘" class="header_1">移动用户下的目录到其他磁盘</a>&nbsp;<br><a href="/blog/de0d0943/#移动用户的文档目录到其他磁盘" class="header_2">移动用户的文档目录到其他磁盘</a>&nbsp;<br><a href="/blog/de0d0943/#移动用户的下载目录到其他磁盘" class="header_2">移动用户的下载目录到其他磁盘</a>&nbsp;<br><a href="/blog/de0d0943/#移动用户的桌面目录到其他磁盘" class="header_2">移动用户的桌面目录到其他磁盘</a>&nbsp;<br><a href="/blog/de0d0943/#Windows设置-系统-存储" class="header_1">Windows设置-系统-存储</a>&nbsp;<br><a href="/blog/de0d0943/#移动微信-QQ-TIM聊天记录" class="header_1">移动微信 QQ TIM聊天记录</a>&nbsp;<br><a href="/blog/de0d0943/#更改微信文件的默认保存位置" class="header_2">更改微信文件的默认保存位置</a>&nbsp;<br><a href="/blog/de0d0943/#移动QQ或者TIM的文件的默认保存位置" class="header_2">移动QQ或者TIM的文件的默认保存位置</a>&nbsp;<br><a href="/blog/de0d0943/#剪切用户目录下的目录到其他磁盘-然后创建重名的符号连接" class="header_1">剪切用户目录下的目录到其他磁盘 然后创建重名的符号连接</a>&nbsp;<br><a href="/blog/de0d0943/#移动VSCode的插件安装目录到其他磁盘" class="header_2">移动VSCode的插件安装目录到其他磁盘</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/de0d0943/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/47fd80ca/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/47fd80ca/" class="post-title-link" itemprop="url">VirtualBox更新</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-04 17:42:56" itemprop="dateCreated datePublished" datetime="2021-04-04T17:42:56+08:00">2021-04-04</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-06 16:55:53" itemprop="dateModified" datetime="2021-04-06T16:55:53+08:00">2021-04-06</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/VirtualBox/" itemprop="url" rel="index"><span itemprop="name">VirtualBox</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/VirtualBox/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/47fd80ca/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/47fd80ca/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/47fd80ca/#下载更新" class="header_1">下载更新</a>&nbsp;<br><a href="/blog/47fd80ca/#VirtualBox软件内下载更新" class="header_2">VirtualBox软件内下载更新</a>&nbsp;<br><a href="/blog/47fd80ca/#官网下载更新（推荐）" class="header_2">官网下载更新（推荐）</a>&nbsp;<br><a href="/blog/47fd80ca/#安装更新" class="header_1">安装更新</a>&nbsp;<br><a href="/blog/47fd80ca/#更新扩展包" class="header_2">更新扩展包</a>&nbsp;<br><a href="/blog/47fd80ca/#更新增强功能" class="header_2">更新增强功能</a>&nbsp;<br><a href="/blog/47fd80ca/#参考资料" class="header_1">参考资料</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/47fd80ca/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/ab19e083/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/ab19e083/" class="post-title-link" itemprop="url">Win10 20H2版本因为VirtulBox无法更新</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-04 16:51:57" itemprop="dateCreated datePublished" datetime="2021-04-04T16:51:57+08:00">2021-04-04</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-08 00:26:28" itemprop="dateModified" datetime="2021-04-08T00:26:28+08:00">2021-04-08</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/Windows/" itemprop="url" rel="index"><span itemprop="name">Windows</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/Windows/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/Windows/%E8%BD%AF%E4%BB%B6/Win10%E8%AE%BE%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">Win10设置</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/ab19e083/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/ab19e083/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/ab19e083/#无法更新的提示信息" class="header_1">无法更新的提示信息</a>&nbsp;<br><a href="/blog/ab19e083/#卸载VirtualBox" class="header_1">卸载VirtualBox</a>&nbsp;<br><a href="/blog/ab19e083/#备份" class="header_2">备份</a>&nbsp;<br><a href="/blog/ab19e083/#卸载VirtualBox" class="header_2">卸载VirtualBox</a>&nbsp;<br><a href="/blog/ab19e083/#重装VirtualBox" class="header_2">重装VirtualBox</a>&nbsp;<br><a href="/blog/ab19e083/#导入虚拟机" class="header_3">导入虚拟机</a>&nbsp;<br><a href="/blog/ab19e083/#删除C盘上-VirtualBox文件，目录" class="header_2">删除C盘上 VirtualBox文件，目录</a>&nbsp;<br><a href="/blog/ab19e083/#卸载模拟器" class="header_1">卸载模拟器</a>&nbsp;<br><a href="/blog/ab19e083/#备份" class="header_2">备份</a>&nbsp;<br><a href="/blog/ab19e083/#重装模拟器" class="header_2">重装模拟器</a>&nbsp;<br><a href="/blog/ab19e083/#安装之前导入的app" class="header_3">安装之前导入的app</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/ab19e083/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/6e64ba3d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/6e64ba3d/" class="post-title-link" itemprop="url">Linux man命令</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-04 14:24:18" itemprop="dateCreated datePublished" datetime="2021-04-04T14:24:18+08:00">2021-04-04</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-20 20:59:22" itemprop="dateModified" datetime="2021-04-20T20:59:22+08:00">2021-04-20</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">通用</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/%E5%B8%AE%E5%8A%A9%E6%96%87%E6%A1%A3/" itemprop="url" rel="index"><span itemprop="name">帮助文档</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/6e64ba3d/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/6e64ba3d/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/6e64ba3d/#man命令简介" class="header_1">man命令简介</a>&nbsp;<br><a href="/blog/6e64ba3d/#man命令分页器" class="header_2">man命令分页器</a>&nbsp;<br><a href="/blog/6e64ba3d/#man命令的几种用法" class="header_1">man命令的几种用法</a>&nbsp;<br><a href="/blog/6e64ba3d/#man-name" class="header_2">man name</a>&nbsp;<br><a href="/blog/6e64ba3d/#man-section-name" class="header_2">man section name</a>&nbsp;<br><a href="/blog/6e64ba3d/#man-section中section的含义" class="header_3">man section中section的含义</a>&nbsp;<br><a href="/blog/6e64ba3d/#man-k-regexp" class="header_2">man -k regexp</a>&nbsp;<br><a href="/blog/6e64ba3d/#man查看C语言的库函数" class="header_2">man查看C语言的库函数</a>&nbsp;<br><a href="/blog/6e64ba3d/#手册页内容" class="header_2">手册页内容</a>&nbsp;<br><a href="/blog/6e64ba3d/#man中文翻译" class="header_2">man中文翻译</a>&nbsp;<br><a href="/blog/6e64ba3d/#Debian-Ubuntu安装man中文翻译" class="header_3">Debian/Ubuntu安装man中文翻译</a>&nbsp;<br><a href="/blog/6e64ba3d/#Arch-Linux" class="header_3">Arch Linux</a>&nbsp;<br><a href="/blog/6e64ba3d/#Red-Hat-CentOS" class="header_3">Red Hat/CentOS</a>&nbsp;<br><a href="/blog/6e64ba3d/#Fedora" class="header_3">Fedora</a>&nbsp;<br><a href="/blog/6e64ba3d/#参考资料" class="header_3">参考资料</a>&nbsp;<br><a href="/blog/6e64ba3d/#man中英文切换" class="header_2">man中英文切换</a>&nbsp;<br><a href="/blog/6e64ba3d/#man-L-en" class="header_3">man -L en</a>&nbsp;<br><a href="/blog/6e64ba3d/#man-L-zh-CN-命令" class="header_4">man -L zh_CN 命令</a>&nbsp;<br><a href="/blog/6e64ba3d/#man-L-zn-TW-命令" class="header_4">man -L zn_TW 命令</a>&nbsp;<br><a href="/blog/6e64ba3d/#使用man-L-en的别名" class="header_3">使用man -L en的别名</a>&nbsp;<br><a href="/blog/6e64ba3d/#示例" class="header_4">示例</a>&nbsp;<br><a href="/blog/6e64ba3d/#临时切换系统语言的环境变量" class="header_3">临时切换系统语言的环境变量</a>&nbsp;<br><a href="/blog/6e64ba3d/#示例" class="header_4">示例</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/6e64ba3d/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/ff69adec/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/ff69adec/" class="post-title-link" itemprop="url">LinuxDeploy CentOS7挂载内部存储的一个目录_设置共享文件夹</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-03 23:18:21" itemprop="dateCreated datePublished" datetime="2021-04-03T23:18:21+08:00">2021-04-03</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-04 14:02:57" itemprop="dateModified" datetime="2021-04-04T14:02:57+08:00">2021-04-04</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/LinuxDeploy/" itemprop="url" rel="index"><span itemprop="name">LinuxDeploy</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/ff69adec/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/ff69adec/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/ff69adec/#成功安装CentOS后再设置挂载点" class="header_1">成功安装CentOS后再设置挂载点</a>&nbsp;<br><a href="/blog/ff69adec/#在Linux中创建共享文件夹（挂载点）" class="header_1">在Linux中创建共享文件夹（挂载点）</a>&nbsp;<br><a href="/blog/ff69adec/#进入-mnt目录" class="header_2">进入/mnt目录</a>&nbsp;<br><a href="/blog/ff69adec/#创建共享目录" class="header_2">创建共享目录</a>&nbsp;<br><a href="/blog/ff69adec/#获取共享目录路径" class="header_2">获取共享目录路径</a>&nbsp;<br><a href="/blog/ff69adec/#SD卡中创建共享目录" class="header_1">SD卡中创建共享目录</a>&nbsp;<br><a href="/blog/ff69adec/#LinuxDeploy上设置挂载点" class="header_1">LinuxDeploy上设置挂载点</a>&nbsp;<br><a href="/blog/ff69adec/#停止服务" class="header_2">停止服务</a>&nbsp;<br><a href="/blog/ff69adec/#输入挂载点的源地址和目的地址" class="header_2">输入挂载点的源地址和目的地址</a>&nbsp;<br><a href="/blog/ff69adec/#配置系统" class="header_1">配置系统</a>&nbsp;<br><a href="/blog/ff69adec/#启动系统" class="header_1">启动系统</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/ff69adec/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/82e2c9af/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/82e2c9af/" class="post-title-link" itemprop="url">终端转义序列 C语言输出红色字体</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-03 22:37:27 / 修改时间：23:14:48" itemprop="dateCreated datePublished" datetime="2021-04-03T22:37:27+08:00">2021-04-03</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/82e2c9af/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/82e2c9af/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/82e2c9af/#终端转义序列" class="header_1">终端转义序列</a>&nbsp;<br><a href="/blog/82e2c9af/#转义字符" class="header_2">转义字符</a>&nbsp;<br><a href="/blog/82e2c9af/#主机发往终端方向数据中的转义序列的功能" class="header_2">主机发往终端方向数据中的转义序列的功能</a>&nbsp;<br><a href="/blog/82e2c9af/#举例" class="header_2">举例</a>&nbsp;<br><a href="/blog/82e2c9af/#C语言示例" class="header_1">C语言示例</a>&nbsp;<br><a href="/blog/82e2c9af/#C语言输出红色字体" class="header_2">C语言输出红色字体</a>&nbsp;<br><a href="/blog/82e2c9af/#设置前景色背景色" class="header_2">设置前景色背景色</a>&nbsp;<br><a href="/blog/82e2c9af/#参考资料" class="header_1">参考资料</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/82e2c9af/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/58d9ef0d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/58d9ef0d/" class="post-title-link" itemprop="url">GCC编译C语言详解</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-03 22:15:32 / 修改时间：23:14:48" itemprop="dateCreated datePublished" datetime="2021-04-03T22:15:32+08:00">2021-04-03</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">C语言</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/58d9ef0d/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/58d9ef0d/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/58d9ef0d/#GCC简介" class="header_1">GCC简介</a>&nbsp;<br><a href="/blog/58d9ef0d/#演示代码" class="header_1">演示代码</a>&nbsp;<br><a href="/blog/58d9ef0d/#生成可执行程序" class="header_1">生成可执行程序</a>&nbsp;<br><a href="/blog/58d9ef0d/#gcc-源文件" class="header_2">gcc 源文件</a>&nbsp;<br><a href="/blog/58d9ef0d/#Linux不以后缀来区分可执行文件" class="header_3">Linux不以后缀来区分可执行文件</a>&nbsp;<br><a href="/blog/58d9ef0d/#gcc-源文件-o-可执行文件" class="header_2">gcc 源文件 -o 可执行文件</a>&nbsp;<br><a href="/blog/58d9ef0d/#在当前目录下输出可执行文件" class="header_3">在当前目录下输出可执行文件</a>&nbsp;<br><a href="/blog/58d9ef0d/#输出可执行文件到其他目录" class="header_3">输出可执行文件到其他目录</a>&nbsp;<br><a href="/blog/58d9ef0d/#运行可执行程序" class="header_1">运行可执行程序</a>&nbsp;<br><a href="/blog/58d9ef0d/#执行当前目录下的可执行程序" class="header_2">执行当前目录下的可执行程序</a>&nbsp;<br><a href="/blog/58d9ef0d/#执行其他目录下的可执行程序" class="header_2">执行其他目录下的可执行程序</a>&nbsp;<br><a href="/blog/58d9ef0d/#添加可执行全选" class="header_2">添加可执行全选</a>&nbsp;<br><a href="/blog/58d9ef0d/#参考资料" class="header_1">参考资料</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/58d9ef0d/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/71914ed4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/71914ed4/" class="post-title-link" itemprop="url">Linux 学习资料</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-03 21:14:06" itemprop="dateCreated datePublished" datetime="2021-04-03T21:14:06+08:00">2021-04-03</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-04 00:42:19" itemprop="dateModified" datetime="2021-04-04T00:42:19+08:00">2021-04-04</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">通用</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/71914ed4/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/71914ed4/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/71914ed4/#学习网站" class="header_1">学习网站</a>&nbsp;<br><a href="/blog/71914ed4/#技术手册" class="header_1">技术手册</a>&nbsp;<br><a href="/blog/71914ed4/#Linux资讯" class="header_1">Linux资讯</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/71914ed4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/c9a18df0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/c9a18df0/" class="post-title-link" itemprop="url">Linux stty命令</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-03 21:06:43 / 修改时间：23:14:48" itemprop="dateCreated datePublished" datetime="2021-04-03T21:06:43+08:00">2021-04-03</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">通用</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/c9a18df0/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/c9a18df0/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/c9a18df0/#stty命令示例" class="header_1">stty命令示例</a>&nbsp;<br><a href="/blog/c9a18df0/#stty-size" class="header_2">stty size</a>&nbsp;<br><a href="/blog/c9a18df0/#参考资料" class="header_1">参考资料</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/c9a18df0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/b02ac37c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+            
+            <a href="/blog/b02ac37c/" class="post-title-link" itemprop="url">idea查找替换整个项目 模块 目录</a>
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-03 14:47:47 / 修改时间：15:05:54" itemprop="dateCreated datePublished" datetime="2021-04-03T14:47:47+08:00">2021-04-03</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/IDE/" itemprop="url" rel="index"><span itemprop="name">IDE</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/IDE/Idea/" itemprop="url" rel="index"><span itemprop="name">Idea</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/b02ac37c/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/b02ac37c/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><div id='my_toc'><a href="/blog/null/#格式化其他模板设置错误" class="header_1">格式化其他模板设置错误</a>&nbsp;<br><a href="/blog/null/#idea搜索整个项目" class="header_1">idea搜索整个项目</a>&nbsp;<br><a href="/blog/null/#idea替换整个项目" class="header_1">idea替换整个项目</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/blog/b02ac37c/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+  </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/blog/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/46/">46</a><a class="extend next" rel="next" href="/blog/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/avatar.gif"
+      alt="蓝蓝">
+  <p class="site-author-name" itemprop="name">蓝蓝</p>
+  <div class="site-description" itemprop="description">先看视频再看书</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/%20%7C%7C%20archive">
+        
+          <span class="site-state-item-count">456</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/%20%7C%7C%20th">
+          
+        
+        <span class="site-state-item-count">168</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/lanlan2017" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;lanlan2017" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/ReadingNotes/" title="ReadingNotes &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;ReadingNotes&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>ReadingNotes</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/" title="blog &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>blog</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/tools/" title="tools &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;tools&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-wrench"></i>tools</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">蓝蓝</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/blog/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+
+<script src="/blog/js/next-boot.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/bookmark.js?v=7.4.1.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+<script src="/blog/js/local-search.js?v=7.4.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      
+    
+  
+    <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+    <script>
+      
+        window.addEventListener('load', () => {
+      
+        quicklink({
+          timeout: 3000,
+          priority: true,
+          ignores: [uri => uri.includes('#'),uri => uri == 'https://tongsiying.github.io/blog/page/6/',]
+        });
+      
+        });
+      
+    </script>
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KVtEjXUX9wDimI183iDfg6tK-MdYXbMMI',
+    appKey: 'mvmFgKF86C8Pi79KfVeFgzys',
+    placeholder: '在这里输入评论',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

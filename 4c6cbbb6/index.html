@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.1" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="_Sly-yzHYmALHXzjFpPWsodMrjBSphw7bfRbMUH80Qc">
+  <meta name="msvalidate.01" content="B1CFD346B8DEBBFE0C983C2AF8955531">
+  <meta name="baidu-site-verification" content="vkMTwK56xr">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="top命令：列出资源占用排名靠前的进程&amp;nbsp;top命令示例&amp;nbsp;top命令第1行：系统正常运行时间&amp;nbsp;top命令第2行：系统进程状态&amp;nbsp;top命令第3行：CPU的状态&amp;nbsp;top命令第4行：内存状态&amp;nbsp;top命令第5行：Swap交换分区相关信息 交换空间使用情况&amp;nbsp;top命令第6行：空行&amp;nbsp;top命令第7行之后：最后输出的表格&amp;nbsp;t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux top命令">
+<meta property="og:url" content="https://tongsiying.github.io/blog/4c6cbbb6/index.html">
+<meta property="og:site_name" content="蓝蓝博客">
+<meta property="og:description" content="top命令：列出资源占用排名靠前的进程&amp;nbsp;top命令示例&amp;nbsp;top命令第1行：系统正常运行时间&amp;nbsp;top命令第2行：系统进程状态&amp;nbsp;top命令第3行：CPU的状态&amp;nbsp;top命令第4行：内存状态&amp;nbsp;top命令第5行：Swap交换分区相关信息 交换空间使用情况&amp;nbsp;top命令第6行：空行&amp;nbsp;top命令第7行之后：最后输出的表格&amp;nbsp;t">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-21T06:27:00.000Z">
+<meta property="article:modified_time" content="2021-04-21T15:33:39.000Z">
+<meta property="article:author" content="蓝蓝">
+<meta property="article:tag" content="程序员">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="读书">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="批处理">
+<meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://tongsiying.github.io/blog/4c6cbbb6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Linux top命令 | 蓝蓝博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蓝蓝博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-dir">
+      
+    
+
+    <a href="/blog/dir/" rel="section"><i class="fa fa-fw fa-sitemap"></i>目录</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-links">
+      
+    
+
+    <a href="/blog/links/" rel="section"><i class="fa fa-fw fa-link"></i>链接</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/lanlan2017" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/4c6cbbb6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">Linux top命令
+
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-21 14:27:00 / 修改时间：23:33:39" itemprop="dateCreated datePublished" datetime="2021-04-21T14:27:00+08:00">2021-04-21</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">通用</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81/" itemprop="url" rel="index"><span itemprop="name">系统状态</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/4c6cbbb6/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/4c6cbbb6/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><div id='my_toc'><a href="/blog/4c6cbbb6/#top命令：列出资源占用排名靠前的进程" class="header_1">top命令：列出资源占用排名靠前的进程</a>&nbsp;<br><a href="/blog/4c6cbbb6/#top命令示例" class="header_2">top命令示例</a>&nbsp;<br><a href="/blog/4c6cbbb6/#top命令第1行：系统正常运行时间" class="header_2">top命令第1行：系统正常运行时间</a>&nbsp;<br><a href="/blog/4c6cbbb6/#top命令第2行：系统进程状态" class="header_2">top命令第2行：系统进程状态</a>&nbsp;<br><a href="/blog/4c6cbbb6/#top命令第3行：CPU的状态" class="header_2">top命令第3行：CPU的状态</a>&nbsp;<br><a href="/blog/4c6cbbb6/#top命令第4行：内存状态" class="header_2">top命令第4行：内存状态</a>&nbsp;<br><a href="/blog/4c6cbbb6/#top命令第5行：Swap交换分区相关信息-交换空间使用情况" class="header_2">top命令第5行：Swap交换分区相关信息 交换空间使用情况</a>&nbsp;<br><a href="/blog/4c6cbbb6/#top命令第6行：空行" class="header_2">top命令第6行：空行</a>&nbsp;<br><a href="/blog/4c6cbbb6/#top命令第7行之后：最后输出的表格" class="header_2">top命令第7行之后：最后输出的表格</a>&nbsp;<br><a href="/blog/4c6cbbb6/#top命令交互操作指令" class="header_2">top命令交互操作指令</a>&nbsp;<br><a href="/blog/4c6cbbb6/#只查看top的内存部分信息" class="header_2">只查看top的内存部分信息</a>&nbsp;<br><a href="/blog/4c6cbbb6/#free" class="header_3">free</a>&nbsp;<br><a href="/blog/4c6cbbb6/#uptime" class="header_3">uptime</a>&nbsp;<br><a href="/blog/4c6cbbb6/#参考资料" class="header_1">参考资料</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br><a id="more"></a></p>
+<script>if (navigator.platform.search('arm')==-1){document.getElementById('my_toc').style.display = 'none';}var e,p = document.getElementsByTagName('p');while (p.length>0) {e = p[0];e.parentElement.removeChild(e);}</script>
+
+<!--end-->
+<h1 id="top命令：列出资源占用排名靠前的进程"><a href="#top命令：列出资源占用排名靠前的进程" class="headerlink" title="top命令：列出资源占用排名靠前的进程"></a>top命令：列出资源占用排名靠前的进程</h1><p>top命令是Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器。top是一个动态显示过程,即可以通过用户按键来不断刷新当前状态.如果在前台执行该命令,它将独占前台,直到用户终止该程序为止.比较准确的说,top命令提供了实时的对系统处理器的状态监视.它将显示系统中CPU最“敏感”的任务列表.该命令可以按CPU使用.内存使用和执行时间对任务进行排序；而且该命令的很多特性都可以通过交互式命令或者在个人定制文件中进行设定。<br>常在linux系统下玩，这是必须掌握的命令之一；</p>
+<h2 id="top命令示例"><a href="#top命令示例" class="headerlink" title="top命令示例"></a>top命令示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# top</span><br><span class="line">top - 14:32:01 up 2 days,  7:01,  2 users,  load average: 6.11, 6.22, 6.34</span><br><span class="line">Tasks: 472 total,   5 running, 459 sleeping,   6 stopped,   2 zombie</span><br><span class="line">%Cpu(s): 17.3 us,  8.7 sy,  0.0 ni, 74.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br><span class="line">KiB Mem :  3686064 total,   227300 free,  1768260 used,  1690504 buff&#x2F;cache</span><br><span class="line">KiB Swap:        0 total,        0 free,        0 used.  1881111 avail Mem </span><br><span class="line"></span><br><span class="line">  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                                  </span><br><span class="line">12711 root      20   0  112604   2396   1372 R  27.3  0.1   0:00.13 top                                                                                      </span><br><span class="line">  454 aid_med+  20   0  106552  29592   9628 S  22.7  0.8 933:10.56 mediaserver                                                                              </span><br><span class="line"> 9269 10116     16  -4 1811124 425120 204272 S   9.1 11.5   8:18.44 .taobao.litetao                                                                          </span><br><span class="line">    7 root      20   0       0      0      0 S   4.5  0.0   6:00.27 rcu_preempt                                                                              </span><br><span class="line">  272 root      rt   0       0      0      0 S   4.5  0.0  26:36.71 cfinteractive                                                                            </span><br><span class="line">    1 root      20   0    1256   1004    396 S   0.0  0.0   2:21.27 init                                                                                     </span><br><span class="line">    2 root      -2   0       0      0      0 S   0.0  0.0   0:00.45 kthreadd                                                                                 </span><br><span class="line">    3 root      20   0       0      0      0 S   0.0  0.0   3:26.01 ksoftirqd&#x2F;0                                                                              </span><br><span class="line">    8 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_bh                                                                                   </span><br><span class="line">    9 root      20   0       0      0      0 S   0.0  0.0   0:00.88 rcu_sched                                                                                </span><br><span class="line">   10 root      rt   0       0      0      0 S   0.0  0.0   0:31.49 migration&#x2F;0                                                                              </span><br><span class="line">   11 root      rt   0       0      0      0 S   0.0  0.0   0:23.31 migration&#x2F;1                                                                              </span><br><span class="line">   12 root      20   0       0      0      0 S   0.0  0.0   2:14.52 ksoftirqd&#x2F;1                                                                              </span><br><span class="line">   15 root      rt   0       0      0      0 S   0.0  0.0   0:19.59 migration&#x2F;2                                                                              </span><br><span class="line">   16 root      20   0       0      0      0 S   0.0  0.0   1:50.65 ksoftirqd&#x2F;2                                                                              </span><br><span class="line">   19 root      rt   0       0      0      0 S   0.0  0.0   0:18.96 migration&#x2F;3                                                                              </span><br><span class="line">   20 root      20   0       0      0      0 S   0.0  0.0   1:37.55 ksoftirqd&#x2F;3                                                                              </span><br><span class="line">   23 root      rt   0       0      0      0 R   0.0  0.0   0:05.20 migration&#x2F;4                                                                              </span><br><span class="line">   24 root      20   0       0      0      0 R   0.0  0.0   0:05.22 ksoftirqd&#x2F;4                                                                              </span><br><span class="line">   26 root       0 -20       0      0      0 S   0.0  0.0   0:00.20 kworker&#x2F;4:0H                                                                             </span><br><span class="line">   27 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 khelper                                                                                  </span><br><span class="line">   28 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 netns                                                                                    </span><br><span class="line">   29 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 wakelock_printk                                                                          </span><br><span class="line">   30 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 perf                                                                                     </span><br><span class="line">   37 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 smd_channel_clo                                                                          </span><br><span class="line">   38 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 smsm_cb_wq                                                                               </span><br><span class="line">   39 root      20   0       0      0      0 D   0.0  0.0   0:00.01 kworker&#x2F;u16:1                                                                            </span><br><span class="line">   40 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 deferwq                                                                                  </span><br><span class="line">   41 root       0 -20       0      0      0 D   0.0  0.0  13:29.07 kworker&#x2F;u17:0                                                                            </span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+<h2 id="top命令第1行：系统正常运行时间"><a href="#top命令第1行：系统正常运行时间" class="headerlink" title="top命令第1行：系统正常运行时间"></a>top命令第1行：系统正常运行时间</h2><p>top命令输出的第一行信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top - 14:32:01 up 2 days,  7:01,  2 users,  load average: 6.11, 6.22, 6.34</span><br></pre></td></tr></table></figure></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">top命令第一行信息</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">14:32:01</td>
+<td style="text-align:left">当前系统时间</td>
+</tr>
+<tr>
+<td style="text-align:left">up 2 days,</td>
+<td style="text-align:left">7:01</td>
+<td>系统已经运行了2天7小时01分钟（在这期间系统没有重启过）</td>
+</tr>
+<tr>
+<td style="text-align:left">2 users</td>
+<td style="text-align:left">当前有2个用户登录系统</td>
+</tr>
+<tr>
+<td style="text-align:left">load average: 6.11, 6.22, 6.34</td>
+<td style="text-align:left">load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。load average数据是每隔5秒钟检查一次活跃的进程数，然后按特定算法计算出的数值。如果这个数除以逻辑CPU的数量，结果高于5的时候就表明系统在超负荷运转了</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>和uptime的输出信息差不多：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# uptime</span><br><span class="line"> 14:31:59 up 2 days,  7:01,  2 users,  load average: 6.11, 6.22, 6.34</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure></p>
+<h2 id="top命令第2行：系统进程状态"><a href="#top命令第2行：系统进程状态" class="headerlink" title="top命令第2行：系统进程状态"></a>top命令第2行：系统进程状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tasks: 472 total,   5 running, 459 sleeping,   6 stopped,   2 zombie</span><br></pre></td></tr></table></figure>
+<p>第2行输出表示当前系统有多少个任务（进程），</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">top命令第2行输出</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Tasks: 472 total</td>
+<td style="text-align:left">系统有472个任务（进程）</td>
+</tr>
+<tr>
+<td style="text-align:left">5 running</td>
+<td style="text-align:left">有5个任务处于运行状态</td>
+</tr>
+<tr>
+<td style="text-align:left">459 sleeping</td>
+<td style="text-align:left">有459个任务处于睡眠状态（阻塞状态）</td>
+</tr>
+<tr>
+<td style="text-align:left">6 stopped</td>
+<td style="text-align:left">有6个任务处于停止状态</td>
+</tr>
+<tr>
+<td style="text-align:left">2 zombie</td>
+<td style="text-align:left">有2个任务处于僵尸状态</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="top命令第3行：CPU的状态"><a href="#top命令第3行：CPU的状态" class="headerlink" title="top命令第3行：CPU的状态"></a>top命令第3行：CPU的状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%Cpu(s): 17.3 us,  8.7 sy,  0.0 ni, 74.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">top命令第三行信息</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">17.3 us</td>
+<td style="text-align:left">用户空间占用CPU的百分比。</td>
+</tr>
+<tr>
+<td style="text-align:left">8.7 sy</td>
+<td style="text-align:left">内核空间占用CPU的百分比。</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0 ni</td>
+<td style="text-align:left">改变过优先级的进程占用CPU的百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">74.0 id</td>
+<td style="text-align:left">空闲CPU百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0 wa</td>
+<td style="text-align:left">IO等待占用CPU的百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0 hi</td>
+<td style="text-align:left">硬中断（Hardware IRQ）占用CPU的百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0 si</td>
+<td style="text-align:left">软中断（Software Interrupts）占用CPU的百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">0.0 st</td>
+<td style="text-align:left">Steal time 虚拟机被hypervisor偷去的CPU时间（如果当前处于一个hypervisor下的vm，实际上hypervisor也是要消耗一部分CPU处理时间的）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注：这里显示数据是所有cpu的平均值，如果想看每一个cpu的处理情况，按1即可；折叠，再次按1；</p>
+<h2 id="top命令第4行：内存状态"><a href="#top命令第4行：内存状态" class="headerlink" title="top命令第4行：内存状态"></a>top命令第4行：内存状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KiB Mem :  3686064 total,   227300 free,  1768260 used,  1690504 buff&#x2F;cache</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">top命令第4行输出</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">3686064 total</td>
+<td style="text-align:left">物理内存总量</td>
+</tr>
+<tr>
+<td style="text-align:left">227300 free</td>
+<td style="text-align:left">空闲内存总量</td>
+</tr>
+<tr>
+<td style="text-align:left">1768260 used</td>
+<td style="text-align:left">使用的物理内存总量</td>
+</tr>
+<tr>
+<td style="text-align:left">1690504 buff/cache</td>
+<td style="text-align:left">用作内核缓存的内存量</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>第四行中<br>使用中的内存总量（used）指的是现在系统内核控制的内存数，<br>空闲内存总量（free）是内核还未纳入其管控范围的数量。<br>纳入内核管理的内存不见得都在使用中，还包括过去使用过的现在可以被重复利用的内存，内核并不把这些可被重新使用的内存交还到free中去，因此在linux上free内存会越来越少，但不用为此担心。</p>
+<p>如果出于习惯去计算可用内存数，这里有个近似的计算公式：第四行的free + 第四行的buffers + 第五行的cached。</p>
+<h2 id="top命令第5行：Swap交换分区相关信息-交换空间使用情况"><a href="#top命令第5行：Swap交换分区相关信息-交换空间使用情况" class="headerlink" title="top命令第5行：Swap交换分区相关信息 交换空间使用情况"></a>top命令第5行：Swap交换分区相关信息 交换空间使用情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">KiB Swap:        0 total,        0 free,        0 used.  1881111 avail Mem</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">top命令第6行输出</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0 total</td>
+<td style="text-align:left">交换分区总量</td>
+</tr>
+<tr>
+<td style="text-align:left">0 free</td>
+<td style="text-align:left">空闲交换分区总量</td>
+</tr>
+<tr>
+<td style="text-align:left">0 used</td>
+<td style="text-align:left">已经使用的交换分区总量</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>对于内存监控，在top里我们要时刻监控第五行swap交换分区的used，如果这个数值在不断的变化，说明内核在不断进行内存和swap的数据交换，这是真正的内存不够用了。</p>
+<h2 id="top命令第6行：空行"><a href="#top命令第6行：空行" class="headerlink" title="top命令第6行：空行"></a>top命令第6行：空行</h2><p>后面的是表格，空行作为分隔符。</p>
+<h2 id="top命令第7行之后：最后输出的表格"><a href="#top命令第7行之后：最后输出的表格" class="headerlink" title="top命令第7行之后：最后输出的表格"></a>top命令第7行之后：最后输出的表格</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                                  </span><br><span class="line">12711 root      20   0  112604   2396   1372 R  27.3  0.1   0:00.13 top                                                                                      </span><br><span class="line">  454 aid_med+  20   0  106552  29592   9628 S  22.7  0.8 933:10.56 mediaserver                                                                              </span><br><span class="line"> 9269 10116     16  -4 1811124 425120 204272 S   9.1 11.5   8:18.44 .taobao.litetao                                                                          </span><br><span class="line">    7 root      20   0       0      0      0 S   4.5  0.0   6:00.27 rcu_preempt                                                                              </span><br><span class="line">  272 root      rt   0       0      0      0 S   4.5  0.0  26:36.71 cfinteractive                                                                            </span><br><span class="line">    1 root      20   0    1256   1004    396 S   0.0  0.0   2:21.27 init                                                                                     </span><br><span class="line">    2 root      -2   0       0      0      0 S   0.0  0.0   0:00.45 kthreadd                                                                                 </span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">top命令第7行</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">PID</td>
+<td style="text-align:left">进程id</td>
+</tr>
+<tr>
+<td style="text-align:left">USER</td>
+<td style="text-align:left">进程所有者</td>
+</tr>
+<tr>
+<td style="text-align:left">PR</td>
+<td style="text-align:left">进程优先级</td>
+</tr>
+<tr>
+<td style="text-align:left">NI</td>
+<td style="text-align:left">nice值。负值表示高优先级，正值表示低优先级</td>
+</tr>
+<tr>
+<td style="text-align:left">VIRT</td>
+<td style="text-align:left">进程逻辑地址空间大小(virtual)，单位kb。VIRT=SWAP+RES，如果随着时间的增长，逻辑地址空间不断扩大，则该可能出现内存泄露</td>
+</tr>
+<tr>
+<td style="text-align:left">RES</td>
+<td style="text-align:left">驻留内存数(Resident),也就是真正占用物理的内存数，单位kb。RES=CODE+DATA</td>
+</tr>
+<tr>
+<td style="text-align:left">SHR</td>
+<td style="text-align:left">与其他进程共享的内存数，单位kb，共享的内存一般有共享函数库，以及其他的共享数据等</td>
+</tr>
+<tr>
+<td style="text-align:left">S</td>
+<td style="text-align:left">进程状态。D=不可中断的睡眠状态 R=运行 S=睡眠 T=跟踪/停止 Z=僵尸进程</td>
+</tr>
+<tr>
+<td style="text-align:left">%CPU</td>
+<td style="text-align:left">上次更新到现在的CPU时间占用百分比，CPU占用有超过100%的可能</td>
+</tr>
+<tr>
+<td style="text-align:left">%MEM</td>
+<td style="text-align:left">进程使用的物理内存百分比</td>
+</tr>
+<tr>
+<td style="text-align:left">TIME+</td>
+<td style="text-align:left">占用的CPU时间，单位1/100秒。正常清空下占用CPU的时间不应随着时间的增长而增长。如果占用CPU的时间随时间的增长而增长，这说明该进程非常忙碌。则该进程可能出现了死循环</td>
+</tr>
+<tr>
+<td style="text-align:left">COMMAND</td>
+<td style="text-align:left">进程名称（命令名/命令行）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="top命令交互操作指令"><a href="#top命令交互操作指令" class="headerlink" title="top命令交互操作指令"></a>top命令交互操作指令</h2><p>下面列出一些常用的 top命令操作指令</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">top命操作指令</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">q</td>
+<td style="text-align:left">退出top命令</td>
+</tr>
+<tr>
+<td style="text-align:left"><Space></td>
+<td style="text-align:left">立即刷新</td>
+</tr>
+<tr>
+<td style="text-align:left">s</td>
+<td style="text-align:left">设置刷新时间间隔</td>
+</tr>
+<tr>
+<td style="text-align:left">c</td>
+<td style="text-align:left">显示命令完全模式</td>
+</tr>
+<tr>
+<td style="text-align:left">t:</td>
+<td style="text-align:left">显示或隐藏进程和CPU状态信息</td>
+</tr>
+<tr>
+<td style="text-align:left">m</td>
+<td style="text-align:left">显示或隐藏内存状态信息</td>
+</tr>
+<tr>
+<td style="text-align:left">l</td>
+<td style="text-align:left">显示或隐藏uptime信息</td>
+</tr>
+<tr>
+<td style="text-align:left">f</td>
+<td style="text-align:left">增加或减少进程显示标志</td>
+</tr>
+<tr>
+<td style="text-align:left">S</td>
+<td style="text-align:left">累计模式，会把已完成或退出的子进程占用的CPU时间累计到父进程的TIME+</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>P</strong></td>
+<td style="text-align:left">按%CPU使用率排行</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>T</strong></td>
+<td style="text-align:left">按TIME+排行</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>M</strong></td>
+<td style="text-align:left">按%MEM排行</td>
+</tr>
+<tr>
+<td style="text-align:left">u</td>
+<td style="text-align:left">指定显示用户进程</td>
+</tr>
+<tr>
+<td style="text-align:left">r</td>
+<td style="text-align:left">修改进程renice值</td>
+</tr>
+<tr>
+<td style="text-align:left">kkill</td>
+<td style="text-align:left">进程</td>
+</tr>
+<tr>
+<td style="text-align:left">i</td>
+<td style="text-align:left">只显示正在运行的进程</td>
+</tr>
+<tr>
+<td style="text-align:left">W</td>
+<td style="text-align:left">保存对top的设置到文件~/.toprc，下次启动将自动调用toprc文件的设置。</td>
+</tr>
+<tr>
+<td style="text-align:left">h</td>
+<td style="text-align:left">帮助命令。</td>
+</tr>
+<tr>
+<td style="text-align:left">q</td>
+<td style="text-align:left">退出</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注：强调一下，使用频率最高的是P、T、M，因为通常使用top，我们就想看看是哪些进程最耗cpu资源、占用的内存最多；<br>注：通过”shift + &gt;”或”shift + &lt;”可以向右或左改变排序列</p>
+<h2 id="只查看top的内存部分信息"><a href="#只查看top的内存部分信息" class="headerlink" title="只查看top的内存部分信息"></a>只查看top的内存部分信息</h2><h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p>如果只需要查看内存：可用free命令。</p>
+<h3 id="uptime"><a href="#uptime" class="headerlink" title="uptime"></a>uptime</h3><p>只查看uptime信息（第一行），可用uptime命令；</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.cnblogs.com/me115/p/3842081.html" target="_blank" rel="noopener">https://www.cnblogs.com/me115/p/3842081.html</a><br><a href="https://blog.csdn.net/yaomingyang/article/details/78968573" target="_blank" rel="noopener">https://blog.csdn.net/yaomingyang/article/details/78968573</a><br><a href="https://liam.page/2020/01/10/the-states-of-processes-on-Linux/" target="_blank" rel="noopener">https://liam.page/2020/01/10/the-states-of-processes-on-Linux/</a><br><a href="https://www.cnblogs.com/peida/archive/2012/12/24/2831353.html" target="_blank" rel="noopener">https://www.cnblogs.com/peida/archive/2012/12/24/2831353.html</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>蓝蓝</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tongsiying.github.io/blog/4c6cbbb6/" title="Linux top命令">https://tongsiying.github.io/blog/4c6cbbb6/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！<br><strong><mark>如果图片无法显示</mark></strong>: <a href='https://lanlan2017.github.io/blog/9a6c2fdf/' target="_blank" rel="noopener">https://lanlan2017.github.io/blog/9a6c2fdf/</a></li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/7733f673/" rel="next" title="Linux uptime命令">
+                  <i class="fa fa-chevron-left"></i> Linux uptime命令
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/blog/56aee8cb/" rel="prev" title="Linux ps命令">
+                  Linux ps命令 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#top命令：列出资源占用排名靠前的进程"><span class="nav-number">1.</span> <span class="nav-text">top命令：列出资源占用排名靠前的进程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令示例"><span class="nav-number">1.1.</span> <span class="nav-text">top命令示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令第1行：系统正常运行时间"><span class="nav-number">1.2.</span> <span class="nav-text">top命令第1行：系统正常运行时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令第2行：系统进程状态"><span class="nav-number">1.3.</span> <span class="nav-text">top命令第2行：系统进程状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令第3行：CPU的状态"><span class="nav-number">1.4.</span> <span class="nav-text">top命令第3行：CPU的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令第4行：内存状态"><span class="nav-number">1.5.</span> <span class="nav-text">top命令第4行：内存状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令第5行：Swap交换分区相关信息-交换空间使用情况"><span class="nav-number">1.6.</span> <span class="nav-text">top命令第5行：Swap交换分区相关信息 交换空间使用情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令第6行：空行"><span class="nav-number">1.7.</span> <span class="nav-text">top命令第6行：空行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令第7行之后：最后输出的表格"><span class="nav-number">1.8.</span> <span class="nav-text">top命令第7行之后：最后输出的表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令交互操作指令"><span class="nav-number">1.9.</span> <span class="nav-text">top命令交互操作指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#只查看top的内存部分信息"><span class="nav-number">1.10.</span> <span class="nav-text">只查看top的内存部分信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#free"><span class="nav-number">1.10.1.</span> <span class="nav-text">free</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uptime"><span class="nav-number">1.10.2.</span> <span class="nav-text">uptime</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/avatar.gif"
+      alt="蓝蓝">
+  <p class="site-author-name" itemprop="name">蓝蓝</p>
+  <div class="site-description" itemprop="description">先看视频再看书</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/%20%7C%7C%20archive">
+        
+          <span class="site-state-item-count">456</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/%20%7C%7C%20th">
+          
+        
+        <span class="site-state-item-count">168</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/lanlan2017" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;lanlan2017" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/ReadingNotes/" title="ReadingNotes &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;ReadingNotes&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>ReadingNotes</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/" title="blog &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>blog</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/tools/" title="tools &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;tools&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-wrench"></i>tools</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">蓝蓝</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/blog/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+
+<script src="/blog/js/next-boot.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/bookmark.js?v=7.4.1.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+<script src="/blog/js/local-search.js?v=7.4.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KVtEjXUX9wDimI183iDfg6tK-MdYXbMMI',
+    appKey: 'mvmFgKF86C8Pi79KfVeFgzys',
+    placeholder: '在这里输入评论',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

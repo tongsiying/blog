@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.1" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="_Sly-yzHYmALHXzjFpPWsodMrjBSphw7bfRbMUH80Qc">
+  <meta name="msvalidate.01" content="B1CFD346B8DEBBFE0C983C2AF8955531">
+  <meta name="baidu-site-verification" content="vkMTwK56xr">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Linux系统中的命令lessless is more 回退浏览的功能更强 可直接使键盘的上下箭头键，或者j,k，类似vi的光标定位键，以及PgUp，PgDn，Home，End键 有的Unix系统不提供less命令，但是可利用more命令的增强功能。less 命令的作用和 more 十分类似，都用来浏览文本文件中的内容，不同之处在于，使用 more 命令浏览文件内容时，只能不断向后翻看，而使用 l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux less命令">
+<meta property="og:url" content="https://tongsiying.github.io/blog/a0a57f0/index.html">
+<meta property="og:site_name" content="蓝蓝博客">
+<meta property="og:description" content="Linux系统中的命令lessless is more 回退浏览的功能更强 可直接使键盘的上下箭头键，或者j,k，类似vi的光标定位键，以及PgUp，PgDn，Home，End键 有的Unix系统不提供less命令，但是可利用more命令的增强功能。less 命令的作用和 more 十分类似，都用来浏览文本文件中的内容，不同之处在于，使用 more 命令浏览文件内容时，只能不断向后翻看，而使用 l">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-23T06:00:40.000Z">
+<meta property="article:modified_time" content="2021-04-23T06:00:40.000Z">
+<meta property="article:author" content="蓝蓝">
+<meta property="article:tag" content="程序员">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="读书">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="批处理">
+<meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://tongsiying.github.io/blog/a0a57f0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Linux less命令 | 蓝蓝博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蓝蓝博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-dir">
+      
+    
+
+    <a href="/blog/dir/" rel="section"><i class="fa fa-fw fa-sitemap"></i>目录</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-links">
+      
+    
+
+    <a href="/blog/links/" rel="section"><i class="fa fa-fw fa-link"></i>链接</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/lanlan2017" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/a0a57f0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">Linux less命令
+
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-23 14:00:40" itemprop="dateCreated datePublished" datetime="2021-04-23T14:00:40+08:00">2021-04-23</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">通用</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%8F%8A%E5%85%B6%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">文本文件及其处理命令</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%8F%8A%E5%85%B6%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/%E8%AF%BB%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">读取文本文件</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/a0a57f0/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/a0a57f0/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Linux系统中的命令less"><a href="#Linux系统中的命令less" class="headerlink" title="Linux系统中的命令less"></a>Linux系统中的命令less</h1><p>less is more</p><ul>
+<li>回退浏览的功能更强</li>
+<li>可直接使键盘的上下箭头键，或者j,k，类似vi的光标定位键，以及PgUp，PgDn，Home，End键</li>
+</ul><p>有的Unix系统不提供less命令，但是可利用more命令的增强功能。</p><p>less 命令的作用和 more 十分类似，都用来浏览文本文件中的内容，不同之处在于，使用 more 命令浏览文件内容时，只能不断向后翻看，而使用 less 命令浏览，既可以向后翻看，也可以向前翻看。<br>不仅如此，为了方面用户浏览文本内容，less 命令还提供了以下几个功能：</p><a id="more"></a>
+
+
+
+<ul>
+<li>使用光标键可以在文本文件中前后（左后）滚屏；</li>
+<li>用行号或百分比作为书签浏览文件；</li>
+<li>提供更加友好的检索、高亮显示等操作；</li>
+<li>兼容常用的字处理程序（如 Vim、Emacs）的键盘操作；</li>
+<li>阅读到文件结束时，less 命令不会退出；</li>
+<li>屏幕底部的信息提示更容易控制使用，而且提供了更多的信息。</li>
+</ul>
+<h2 id="less-—help"><a href="#less-—help" class="headerlink" title="less —help"></a>less —help</h2><p>输入<code>less --help</code>或者<code>less -?</code>可查看less的帮组文档：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br></pre></td><td class="code"><pre><span class="line">                  SUMMARY OF LESS COMMANDS</span><br><span class="line"></span><br><span class="line">     Commands marked with * may be preceded by a number, N.</span><br><span class="line">     Notes in parentheses indicate the behavior if N is given.</span><br><span class="line">     A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K.</span><br><span class="line"></span><br><span class="line"> h  H                 Display this help.</span><br><span class="line"> q  :q  Q  :Q  ZZ     Exit.</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">                          MOVING</span><br><span class="line"></span><br><span class="line"> e  ^E  j  ^N  CR  *  Forward  one line   (or N lines).</span><br><span class="line"> y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines).</span><br><span class="line"> f  ^F  ^V  SPACE  *  Forward  one window (or N lines).</span><br><span class="line"> b  ^B  ESC-v      *  Backward one window (or N lines).</span><br><span class="line"> z                 *  Forward  one window (and set window to N).</span><br><span class="line"> w                 *  Backward one window (and set window to N).</span><br><span class="line"> ESC-SPACE         *  Forward  one window, but don&#39;t stop at end-of-file.</span><br><span class="line"> d  ^D             *  Forward  one half-window (and set half-window to N).</span><br><span class="line"> u  ^U             *  Backward one half-window (and set half-window to N).</span><br><span class="line"> ESC-)  RightArrow *  Left  one half screen width (or N positions).</span><br><span class="line"> ESC-(  LeftArrow  *  Right one half screen width (or N positions).</span><br><span class="line"> F                    Forward forever; like &quot;tail -f&quot;.</span><br><span class="line"> r  ^R  ^L            Repaint screen.</span><br><span class="line"> R                    Repaint screen, discarding buffered input.</span><br><span class="line">       ---------------------------------------------------</span><br><span class="line">       Default &quot;window&quot; is the screen height.</span><br><span class="line">       Default &quot;half-window&quot; is half of the screen height.</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">                         SEARCHING</span><br><span class="line"></span><br><span class="line"> &#x2F;pattern          *  Search forward for (N-th) matching line.</span><br><span class="line"> ?pattern          *  Search backward for (N-th) matching line.</span><br><span class="line"> n                 *  Repeat previous search (for N-th occurrence).</span><br><span class="line"> N                 *  Repeat previous search in reverse direction.</span><br><span class="line"> ESC-n             *  Repeat previous search, spanning files.</span><br><span class="line"> ESC-N             *  Repeat previous search, reverse dir. &amp; spanning files.</span><br><span class="line"> ESC-u                Undo (toggle) search highlighting.</span><br><span class="line"> &amp;pattern          *  Display only matching lines</span><br><span class="line">       ---------------------------------------------------</span><br><span class="line">       A search pattern may be preceded by one or more of:</span><br><span class="line">       ^N or !  Search for NON-matching lines.</span><br><span class="line">       ^E or *  Search multiple files (pass thru END OF FILE).</span><br><span class="line">       ^F or @  Start search at FIRST file (for &#x2F;) or last file (for ?).</span><br><span class="line">       ^K       Highlight matches, but don&#39;t move (KEEP position).</span><br><span class="line">       ^R       Don&#39;t use REGULAR EXPRESSIONS.</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">                          JUMPING</span><br><span class="line"></span><br><span class="line"> g  &lt;  ESC-&lt;       *  Go to first line in file (or line N).</span><br><span class="line"> G  &gt;  ESC-&gt;       *  Go to last line in file (or line N).</span><br><span class="line"> p  %              *  Go to beginning of file (or N percent into file).</span><br><span class="line"> t                 *  Go to the (N-th) next tag.</span><br><span class="line"> T                 *  Go to the (N-th) previous tag.</span><br><span class="line"> &#123;  (  [           *  Find close bracket &#125; ) ].</span><br><span class="line"> &#125;  )  ]           *  Find open bracket &#123; ( [.</span><br><span class="line"> ESC-^F &lt;c1&gt; &lt;c2&gt;  *  Find close bracket &lt;c2&gt;.</span><br><span class="line"> ESC-^B &lt;c1&gt; &lt;c2&gt;  *  Find open bracket &lt;c1&gt; </span><br><span class="line">       ---------------------------------------------------</span><br><span class="line">       Each &quot;find close bracket&quot; command goes forward to the close bracket </span><br><span class="line">         matching the (N-th) open bracket in the top line.</span><br><span class="line">       Each &quot;find open bracket&quot; command goes backward to the open bracket </span><br><span class="line">         matching the (N-th) close bracket in the bottom line.</span><br><span class="line"></span><br><span class="line"> m&lt;letter&gt;            Mark the current position with &lt;letter&gt;.</span><br><span class="line"> &#39;&lt;letter&gt;            Go to a previously marked position.</span><br><span class="line"> &#39;&#39;                   Go to the previous position.</span><br><span class="line"> ^X^X                 Same as &#39;.</span><br><span class="line">       ---------------------------------------------------</span><br><span class="line">       A mark is any upper-case or lower-case letter.</span><br><span class="line">       Certain marks are predefined:</span><br><span class="line">            ^  means  beginning of the file</span><br><span class="line">            $  means  end of the file</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">                       CHANGING FILES</span><br><span class="line"></span><br><span class="line"> :e [file]            Examine a new file.</span><br><span class="line"> ^X^V                 Same as :e.</span><br><span class="line"> :n                *  Examine the (N-th) next file from the command line.</span><br><span class="line"> :p                *  Examine the (N-th) previous file from the command line.</span><br><span class="line"> :x                *  Examine the first (or N-th) file from the command line.</span><br><span class="line"> :d                   Delete the current file from the command line list.</span><br><span class="line"> &#x3D;  ^G  :f            Print current file name.</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">                   MISCELLANEOUS COMMANDS</span><br><span class="line"></span><br><span class="line"> -&lt;flag&gt;              Toggle a command line option [see OPTIONS below].</span><br><span class="line"> --&lt;name&gt;             Toggle a command line option, by name.</span><br><span class="line"> _&lt;flag&gt;              Display the setting of a command line option.</span><br><span class="line"> __&lt;name&gt;             Display the setting of an option, by name.</span><br><span class="line"> +cmd                 Execute the less cmd each time a new file is examined.</span><br><span class="line"></span><br><span class="line"> !command             Execute the shell command with $SHELL.</span><br><span class="line"> |Xcommand            Pipe file between current pos &amp; mark X to shell command.</span><br><span class="line"> v                    Edit the current file with $VISUAL or $EDITOR.</span><br><span class="line"> V                    Print version number of &quot;less&quot;.</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">                          OPTIONS</span><br><span class="line"></span><br><span class="line">       Most options may be changed either on the command line,</span><br><span class="line">       or from within less by using the - or -- command.</span><br><span class="line">       Options may be given in one of two forms: either a single</span><br><span class="line">       character preceded by a -, or a name preceded by --.</span><br><span class="line"></span><br><span class="line"> -?  ........  --help</span><br><span class="line">                 Display help (from command line).</span><br><span class="line"> -a  ........  --search-skip-screen</span><br><span class="line">                 Search skips current screen.</span><br><span class="line"> -A  ........  --SEARCH-SKIP-SCREEN</span><br><span class="line">                 Search starts just after target line.</span><br><span class="line"> -b [N]  ....  --buffers&#x3D;[N]</span><br><span class="line">                 Number of buffers.</span><br><span class="line"> -B  ........  --auto-buffers</span><br><span class="line">                 Don&#39;t automatically allocate buffers for pipes.</span><br><span class="line"> -c  -C  ....  --clear-screen --CLEAR-SCREEN</span><br><span class="line">                 Repaint by clearing rather than scrolling.</span><br><span class="line"> -d  ........  --dumb</span><br><span class="line">                 Dumb terminal.</span><br><span class="line"> -D [xn.n]  .  --color&#x3D;xn.n</span><br><span class="line">                 Set screen colors. (MS-DOS only)</span><br><span class="line"> -e  -E  ....  --quit-at-eof  --QUIT-AT-EOF</span><br><span class="line">                 Quit at end of file.</span><br><span class="line"> -f  ........  --force</span><br><span class="line">                 Force open non-regular files.</span><br><span class="line"> -F  ........  --quit-if-one-screen</span><br><span class="line">                 Quit if entire file fits on first screen.</span><br><span class="line"> -g  ........  --hilite-search</span><br><span class="line">                 Highlight only last match for searches.</span><br><span class="line"> -G  ........  --HILITE-SEARCH</span><br><span class="line">                 Don&#39;t highlight any matches for searches.</span><br><span class="line"> --old-bot</span><br><span class="line">                 Revert to the old bottom of screen behavior.</span><br><span class="line"> -h [N]  ....  --max-back-scroll&#x3D;[N]</span><br><span class="line">                 Backward scroll limit.</span><br><span class="line"> -i  ........  --ignore-case</span><br><span class="line">                 Ignore case in searches that do not contain uppercase.</span><br><span class="line"> -I  ........  --IGNORE-CASE</span><br><span class="line">                 Ignore case in all searches.</span><br><span class="line"> -j [N]  ....  --jump-target&#x3D;[N]</span><br><span class="line">                 Screen position of target lines.</span><br><span class="line"> -J  ........  --status-column</span><br><span class="line">                 Display a status column at left edge of screen.</span><br><span class="line"> -k [file]  .  --lesskey-file&#x3D;[file]</span><br><span class="line">                 Use a lesskey file.</span><br><span class="line"> -K            --quit-on-intr</span><br><span class="line">                 Exit less in response to ctrl-C.</span><br><span class="line"> -L  ........  --no-lessopen</span><br><span class="line">                 Ignore the LESSOPEN environment variable.</span><br><span class="line"> -m  -M  ....  --long-prompt  --LONG-PROMPT</span><br><span class="line">                 Set prompt style.</span><br><span class="line"> -n  ........  --line-numbers</span><br><span class="line">                 Don&#39;t use line numbers.</span><br><span class="line"> -N  ........  --LINE-NUMBERS</span><br><span class="line">                 Use line numbers.</span><br><span class="line"> -o [file]  .  --log-file&#x3D;[file]</span><br><span class="line">                 Copy to log file (standard input only).</span><br><span class="line"> -O [file]  .  --LOG-FILE&#x3D;[file]</span><br><span class="line">                 Copy to log file (unconditionally overwrite).</span><br><span class="line"> -p [pattern]  --pattern&#x3D;[pattern]</span><br><span class="line">                 Start at pattern (from command line).</span><br><span class="line"> -P [prompt]   --prompt&#x3D;[prompt]</span><br><span class="line">                 Define new prompt.</span><br><span class="line"> -q  -Q  ....  --quiet  --QUIET  --silent --SILENT</span><br><span class="line">                 Quiet the terminal bell.</span><br><span class="line"> -r  -R  ....  --raw-control-chars  --RAW-CONTROL-CHARS</span><br><span class="line">                 Output &quot;raw&quot; control characters.</span><br><span class="line"> -s  ........  --squeeze-blank-lines</span><br><span class="line">                 Squeeze multiple blank lines.</span><br><span class="line"> -S  ........  --chop-long-lines</span><br><span class="line">                 Chop (truncate) long lines rather than wrapping.</span><br><span class="line"> -t [tag]  ..  --tag&#x3D;[tag]</span><br><span class="line">                 Find a tag.</span><br><span class="line"> -T [tagsfile] --tag-file&#x3D;[tagsfile]</span><br><span class="line">                 Use an alternate tags file.</span><br><span class="line"> -u  -U  ....  --underline-special  --UNDERLINE-SPECIAL</span><br><span class="line">                 Change handling of backspaces.</span><br><span class="line"> -V  ........  --version</span><br><span class="line">                 Display the version number of &quot;less&quot;.</span><br><span class="line"> -w  ........  --hilite-unread</span><br><span class="line">                 Highlight first new line after forward-screen.</span><br><span class="line"> -W  ........  --HILITE-UNREAD</span><br><span class="line">                 Highlight first new line after any forward movement.</span><br><span class="line"> -x [N[,...]]  --tabs&#x3D;[N[,...]]</span><br><span class="line">                 Set tab stops.</span><br><span class="line"> -X  ........  --no-init</span><br><span class="line">                 Don&#39;t use termcap init&#x2F;deinit strings.</span><br><span class="line"> -y [N]  ....  --max-forw-scroll&#x3D;[N]</span><br><span class="line">                 Forward scroll limit.</span><br><span class="line"> -z [N]  ....  --window&#x3D;[N]</span><br><span class="line">                 Set size of window.</span><br><span class="line"> -&quot; [c[c]]  .  --quotes&#x3D;[c[c]]</span><br><span class="line">                 Set shell quote characters.</span><br><span class="line"> -~  ........  --tilde</span><br><span class="line">                 Don&#39;t display tildes after end of file.</span><br><span class="line"> -# [N]  ....  --shift&#x3D;[N]</span><br><span class="line">                 Horizontal scroll amount (0 &#x3D; one half screen width)</span><br><span class="line">     ........  --no-keypad</span><br><span class="line">                 Don&#39;t send termcap keypad init&#x2F;deinit strings.</span><br><span class="line">     ........  --follow-name</span><br><span class="line">                 The F command changes files if the input file is renamed.</span><br><span class="line">     ........  --use-backslash</span><br><span class="line">                 Subsequent options use backslash as escape char.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">                         LINE EDITING</span><br><span class="line"></span><br><span class="line">       These keys can be used to edit text being entered </span><br><span class="line">       on the &quot;command line&quot; at the bottom of the screen.</span><br><span class="line"></span><br><span class="line">RightArrow                       ESC-l     Move cursor right one character.</span><br><span class="line">LeftArrow                        ESC-h     Move cursor left one character.</span><br><span class="line">ctrl-RightArrow  ESC-RightArrow  ESC-w     Move cursor right one word.</span><br><span class="line">ctrl-LeftArrow   ESC-LeftArrow   ESC-b     Move cursor left one word.</span><br><span class="line">HOME                             ESC-0     Move cursor to start of line.</span><br><span class="line">END                              ESC-$     Move cursor to end of line.</span><br><span class="line">BACKSPACE                                  Delete char to left of cursor.</span><br><span class="line">DELETE                           ESC-x     Delete char under cursor.</span><br><span class="line">ctrl-BACKSPACE   ESC-BACKSPACE             Delete word to left of cursor.</span><br><span class="line">ctrl-DELETE      ESC-DELETE      ESC-X     Delete word under cursor.</span><br><span class="line">ctrl-U           ESC (MS-DOS only)         Delete entire line.</span><br><span class="line">UpArrow                          ESC-k     Retrieve previous command line.</span><br><span class="line">DownArrow                        ESC-j     Retrieve next command line.</span><br><span class="line">TAB                                        Complete filename &amp; cycle.</span><br><span class="line">SHIFT-TAB                        ESC-TAB   Complete filename &amp; reverse cycle.</span><br><span class="line">ctrl-L                                     Complete filename, list all.</span><br></pre></td></tr></table></figure></p>
+<h1 id="less交互指令"><a href="#less交互指令" class="headerlink" title="less交互指令"></a>less交互指令</h1><p>在使用 less 命令查看文件内容的过程中，和 more 命令一样，也会进入交互界面，因此需要读者掌握一些常用的交互指令。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">交互指令</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">/字符串</td>
+<td style="text-align:left">向下搜索“字符串”的功能。</td>
+</tr>
+<tr>
+<td style="text-align:left">?字符串</td>
+<td style="text-align:left">向上搜索“字符串”的功能。</td>
+</tr>
+<tr>
+<td style="text-align:left">n</td>
+<td style="text-align:left">重复*前一个搜索（与 / 成 ? 有关）。</td>
+</tr>
+<tr>
+<td style="text-align:left">N</td>
+<td style="text-align:left">反向重复前一个搜索（与 / 或 ? 有关）。</td>
+</tr>
+<tr>
+<td style="text-align:left">b</td>
+<td style="text-align:left">向上移动一页。</td>
+</tr>
+<tr>
+<td style="text-align:left">d</td>
+<td style="text-align:left">向下移动半页。</td>
+</tr>
+<tr>
+<td style="text-align:left">h 或 H</td>
+<td style="text-align:left">显示帮助界面。</td>
+</tr>
+<tr>
+<td style="text-align:left">q 或 Q</td>
+<td style="text-align:left">退出 less 命令。</td>
+</tr>
+<tr>
+<td style="text-align:left">y</td>
+<td style="text-align:left">向上移动一行。</td>
+</tr>
+<tr>
+<td style="text-align:left">空格键</td>
+<td style="text-align:left">向下移动一页。</td>
+</tr>
+<tr>
+<td style="text-align:left">回车键</td>
+<td style="text-align:left">向下移动一行。</td>
+</tr>
+<tr>
+<td style="text-align:left">【PgDn】键</td>
+<td style="text-align:left">向下移动一页。</td>
+</tr>
+<tr>
+<td style="text-align:left">【PgUp】键</td>
+<td style="text-align:left">向上移动一页。</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+f</td>
+<td style="text-align:left">向下移动一页。</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+b</td>
+<td style="text-align:left">向上移动一页。</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+d</td>
+<td style="text-align:left">向下移动一页。</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+u</td>
+<td style="text-align:left">向上移动半页。</td>
+</tr>
+<tr>
+<td style="text-align:left">j</td>
+<td style="text-align:left">向下移动一行。</td>
+</tr>
+<tr>
+<td style="text-align:left">k</td>
+<td style="text-align:left">向上移动一行。</td>
+</tr>
+<tr>
+<td style="text-align:left">G</td>
+<td style="text-align:left">移动至最后一行。</td>
+</tr>
+<tr>
+<td style="text-align:left">g</td>
+<td style="text-align:left">移动到第一行。</td>
+</tr>
+<tr>
+<td style="text-align:left">ZZ</td>
+<td style="text-align:left">退出 less 命令。</td>
+</tr>
+<tr>
+<td style="text-align:left">v</td>
+<td style="text-align:left">使用配置的编辑器编辑当前文件。</td>
+</tr>
+<tr>
+<td style="text-align:left">[</td>
+<td style="text-align:left">移动到本文档的上一个节点。</td>
+</tr>
+<tr>
+<td style="text-align:left">]</td>
+<td style="text-align:left">移动到本文档的下一个节点。</td>
+</tr>
+<tr>
+<td style="text-align:left">p</td>
+<td style="text-align:left">移动到同级的上一个节点。</td>
+</tr>
+<tr>
+<td style="text-align:left">u</td>
+<td style="text-align:left">向上移动半页。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="less选项"><a href="#less选项" class="headerlink" title="less选项"></a>less选项</h1><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">选项</th>
+<th style="text-align:left">选项含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-N</td>
+<td style="text-align:left">显示每行的行号。</td>
+</tr>
+<tr>
+<td style="text-align:left">-S</td>
+<td style="text-align:left">行过长时将超出部分舍弃。</td>
+</tr>
+<tr>
+<td style="text-align:left">-e</td>
+<td style="text-align:left">当文件显示结束后，自动离开。</td>
+</tr>
+<tr>
+<td style="text-align:left">-g</td>
+<td style="text-align:left">只标志最后搜索到的关键同。</td>
+</tr>
+<tr>
+<td style="text-align:left">-Q</td>
+<td style="text-align:left">不使用警告音。</td>
+</tr>
+<tr>
+<td style="text-align:left">-i</td>
+<td style="text-align:left">忽略搜索时的大小写。</td>
+</tr>
+<tr>
+<td style="text-align:left">-m</td>
+<td style="text-align:left">显示类似 more 命令的百分比。</td>
+</tr>
+<tr>
+<td style="text-align:left">-f</td>
+<td style="text-align:left">强迫打开特殊文件，比如外围设备代号、目录和二进制文件。</td>
+</tr>
+<tr>
+<td style="text-align:left">-s</td>
+<td style="text-align:left">显示连续空行为一行。</td>
+</tr>
+<tr>
+<td style="text-align:left">-b &lt;缓冲区大小&gt;</td>
+<td style="text-align:left">设置缓冲区的大小。</td>
+</tr>
+<tr>
+<td style="text-align:left">-o &lt;文件名&gt;</td>
+<td style="text-align:left">将 less 输出的内容保存到指定文件中。</td>
+</tr>
+<tr>
+<td style="text-align:left">-x &lt;数字&gt;</td>
+<td style="text-align:left">将【Tab】键显示为规定的数字空格。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="less-N-filename：显示行号"><a href="#less-N-filename：显示行号" class="headerlink" title="less -N filename：显示行号"></a>less -N filename：显示行号</h2><p>如果要 less 显示行号，请使用以下 -N 选项启动程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less -N filename</span><br></pre></td></tr></table></figure></p>
+<h2 id="less-X-filename"><a href="#less-X-filename" class="headerlink" title="less -X filename"></a>less -X filename</h2><p>默认情况下， less 退出时，将从屏幕中清除文件内容。要在屏幕上保留文件内容，请使用以下 -X 选项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less -X filename</span><br></pre></td></tr></table></figure></p>
+<pre>
+[root@localhost Linux_Test]&#35; less -X date_test.txt 
+<mark>2020-01-24 04:05:06</mark>
+2021/4/25
+[root@localhost Linux_Test]&#35; 
+</pre>
+
+<h2 id="less-F-日志文件"><a href="#less-F-日志文件" class="headerlink" title="less +F 日志文件"></a>less +F 日志文件</h2><p>该 +F 选项告诉 less 您查看文件内容可能会更改。这在打开日志文件时很有用。<br>less +F /var/log/messages<br>添加了 +F 选项的 less的表现与 tail -f 命令几乎相同。</p>
+<h1 id="less使用示例"><a href="#less使用示例" class="headerlink" title="less使用示例"></a>less使用示例</h1><h2 id="命令-less"><a href="#命令-less" class="headerlink" title="命令|less"></a>命令|less</h2><h3 id="查看命令历史使用记录并通过less分页显示"><a href="#查看命令历史使用记录并通过less分页显示" class="headerlink" title="查看命令历史使用记录并通过less分页显示"></a>查看命令历史使用记录并通过less分页显示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history | less</span><br></pre></td></tr></table></figure>
+<h3 id="ps查看进程信息并通过less分页显示"><a href="#ps查看进程信息并通过less分页显示" class="headerlink" title="ps查看进程信息并通过less分页显示"></a>ps查看进程信息并通过less分页显示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef |less</span><br></pre></td></tr></table></figure>
+<h2 id="查看多个文件"><a href="#查看多个文件" class="headerlink" title="查看多个文件"></a>查看多个文件</h2><h3 id="一开始就打开多个文件"><a href="#一开始就打开多个文件" class="headerlink" title="一开始就打开多个文件"></a>一开始就打开多个文件</h3><p>方式一，传递多个参数给 less，就能浏览多个文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less log.txt log.log</span><br></pre></td></tr></table></figure></p>
+<h3 id="在less中使用less查看另一个文件"><a href="#在less中使用less查看另一个文件" class="headerlink" title="在less中使用less查看另一个文件"></a>在less中使用less查看另一个文件</h3><p>方式二，正在浏览一个文件时，使用 :e 打开另一个文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:e file2</span><br></pre></td></tr></table></figure><br>当打开多个文件时，使用如下命令在多个文件之间切换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:n - 浏览下一个文件</span><br><span class="line">:p - 浏览前一个文件</span><br></pre></td></tr></table></figure></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://c.biancheng.net/view/4004.html" target="_blank" rel="noopener">http://c.biancheng.net/view/4004.html</a><br><a href="https://www.runoob.com/linux/linux-comm-less.html" target="_blank" rel="noopener">https://www.runoob.com/linux/linux-comm-less.html</a><br><a href="https://www.linuxidc.com/Linux/2019-08/159901.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2019-08/159901.htm</a><br><a href="https://www.yiibai.com/linux/less.html" target="_blank" rel="noopener">https://www.yiibai.com/linux/less.html</a><br><a href="https://segmentfault.com/a/1190000011653442" target="_blank" rel="noopener">https://segmentfault.com/a/1190000011653442</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>蓝蓝</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tongsiying.github.io/blog/a0a57f0/" title="Linux less命令">https://tongsiying.github.io/blog/a0a57f0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！<br><strong><mark>如果图片无法显示</mark></strong>: <a href='https://lanlan2017.github.io/blog/9a6c2fdf/' target="_blank" rel="noopener">https://lanlan2017.github.io/blog/9a6c2fdf/</a></li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/bfddd61e/" rel="next" title="Linux中有哪些文本文件">
+                  <i class="fa fa-chevron-left"></i> Linux中有哪些文本文件
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/blog/c4a3bc5b/" rel="prev" title="Linux yum安装剪贴板xclip命令提示”没有可用软件包”">
+                  Linux yum安装剪贴板xclip命令提示”没有可用软件包” <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux系统中的命令less"><span class="nav-number">1.</span> <span class="nav-text">Linux系统中的命令less</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#less-—help"><span class="nav-number">1.1.</span> <span class="nav-text">less —help</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#less交互指令"><span class="nav-number">2.</span> <span class="nav-text">less交互指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#less选项"><span class="nav-number">3.</span> <span class="nav-text">less选项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#less-N-filename：显示行号"><span class="nav-number">3.1.</span> <span class="nav-text">less -N filename：显示行号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-X-filename"><span class="nav-number">3.2.</span> <span class="nav-text">less -X filename</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less-F-日志文件"><span class="nav-number">3.3.</span> <span class="nav-text">less +F 日志文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#less使用示例"><span class="nav-number">4.</span> <span class="nav-text">less使用示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令-less"><span class="nav-number">4.1.</span> <span class="nav-text">命令|less</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看命令历史使用记录并通过less分页显示"><span class="nav-number">4.1.1.</span> <span class="nav-text">查看命令历史使用记录并通过less分页显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ps查看进程信息并通过less分页显示"><span class="nav-number">4.1.2.</span> <span class="nav-text">ps查看进程信息并通过less分页显示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看多个文件"><span class="nav-number">4.2.</span> <span class="nav-text">查看多个文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一开始就打开多个文件"><span class="nav-number">4.2.1.</span> <span class="nav-text">一开始就打开多个文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在less中使用less查看另一个文件"><span class="nav-number">4.2.2.</span> <span class="nav-text">在less中使用less查看另一个文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/avatar.gif"
+      alt="蓝蓝">
+  <p class="site-author-name" itemprop="name">蓝蓝</p>
+  <div class="site-description" itemprop="description">先看视频再看书</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/%20%7C%7C%20archive">
+        
+          <span class="site-state-item-count">456</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/%20%7C%7C%20th">
+          
+        
+        <span class="site-state-item-count">168</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/lanlan2017" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;lanlan2017" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/ReadingNotes/" title="ReadingNotes &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;ReadingNotes&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>ReadingNotes</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/" title="blog &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>blog</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/tools/" title="tools &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;tools&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-wrench"></i>tools</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">蓝蓝</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/blog/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+
+<script src="/blog/js/next-boot.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/bookmark.js?v=7.4.1.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+<script src="/blog/js/local-search.js?v=7.4.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KVtEjXUX9wDimI183iDfg6tK-MdYXbMMI',
+    appKey: 'mvmFgKF86C8Pi79KfVeFgzys',
+    placeholder: '在这里输入评论',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

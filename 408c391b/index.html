@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.1" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="_Sly-yzHYmALHXzjFpPWsodMrjBSphw7bfRbMUH80Qc">
+  <meta name="msvalidate.01" content="B1CFD346B8DEBBFE0C983C2AF8955531">
+  <meta name="baidu-site-verification" content="vkMTwK56xr">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Linux sort命令：对文本文件的行排序sort 是 Linux 的排序命令，而且可以依据不同的数据类型来进行排序。sort 将文件的每一行作为一个单位，相互比较。比较原则是从首字符向后，依次按 ASCII 码值进行比较，最后将它们按升序输出。Sort是用于对单个或多个文本文件内容进行排序的Linux程序。Sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。需要注意的是除非">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux sort命令">
+<meta property="og:url" content="https://tongsiying.github.io/blog/408c391b/index.html">
+<meta property="og:site_name" content="蓝蓝博客">
+<meta property="og:description" content="Linux sort命令：对文本文件的行排序sort 是 Linux 的排序命令，而且可以依据不同的数据类型来进行排序。sort 将文件的每一行作为一个单位，相互比较。比较原则是从首字符向后，依次按 ASCII 码值进行比较，最后将它们按升序输出。Sort是用于对单个或多个文本文件内容进行排序的Linux程序。Sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。需要注意的是除非">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-24T11:30:50.000Z">
+<meta property="article:modified_time" content="2021-04-24T11:30:50.000Z">
+<meta property="article:author" content="蓝蓝">
+<meta property="article:tag" content="程序员">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="读书">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="批处理">
+<meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://tongsiying.github.io/blog/408c391b/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Linux sort命令 | 蓝蓝博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蓝蓝博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-dir">
+      
+    
+
+    <a href="/blog/dir/" rel="section"><i class="fa fa-fw fa-sitemap"></i>目录</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-links">
+      
+    
+
+    <a href="/blog/links/" rel="section"><i class="fa fa-fw fa-link"></i>链接</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/lanlan2017" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/408c391b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">Linux sort命令
+
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-24 19:30:50" itemprop="dateCreated datePublished" datetime="2021-04-24T19:30:50+08:00">2021-04-24</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">通用</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%8F%8A%E5%85%B6%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/" itemprop="url" rel="index"><span itemprop="name">文本文件及其处理命令</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%8F%8A%E5%85%B6%E5%A4%84%E7%90%86%E5%91%BD%E4%BB%A4/%E5%A4%84%E7%90%86%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">处理文本文件</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/408c391b/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/408c391b/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Linux-sort命令：对文本文件的行排序"><a href="#Linux-sort命令：对文本文件的行排序" class="headerlink" title="Linux sort命令：对文本文件的行排序"></a>Linux sort命令：对文本文件的行排序</h1><p>sort 是 Linux 的排序命令，而且可以依据不同的数据类型来进行排序。sort 将文件的每一行作为一个单位，相互比较。比较原则是<strong>从首字符向后，依次按 ASCII 码值进行比较</strong>，最后将它们按<strong>升序</strong>输出。</p><p>Sort是用于对单个或多个文本文件内容进行排序的Linux程序。Sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。需要注意的是除非你将输出重定向到文件中，否则Sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。</p><a id="more"></a>
+
+<h2 id="sort选项"><a href="#sort选项" class="headerlink" title="sort选项:"></a>sort选项:</h2><p>-f：忽略大小写；<br>-b：忽略每行前面的空白部分；<br>-n：以数值型进行排序，默认使用字符串排序；<br>-r：反向排序；<br>-u：删除重复行。就是 uniq 命令；<br>-t：指定分隔符，默认分隔符是制表符；<br>-k [n,m]：按照指定的字段范围排序。从第 n 个字段开始，到第 m 个字（默认到行尾）；</p>
+<p>sort 命令默认是用每行开头的第一个字符来进行排序的，比如：</p>
+<h2 id="sort-—help"><a href="#sort-—help" class="headerlink" title="sort —help"></a>sort —help</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# sort --help</span><br><span class="line">用法：sort [选项]... [文件]...</span><br><span class="line">　或：sort [选项]... --files0-from&#x3D;F</span><br><span class="line">Write sorted concatenation of all FILE(s) to standard output.</span><br><span class="line"></span><br><span class="line">Mandatory arguments to long options are mandatory for short options too.</span><br><span class="line">排序选项：</span><br><span class="line"></span><br><span class="line">  -b, --ignore-leading-blanks    忽略前导的空白区域</span><br><span class="line">  -d, --dictionary-order    只考虑空白区域和字母字符</span><br><span class="line">  -f, --ignore-case        忽略字母大小写</span><br><span class="line">  -g, --general-numeric-sort  compare according to general numerical value</span><br><span class="line">  -i, --ignore-nonprinting    consider only printable characters</span><br><span class="line">  -M, --month-sort            compare (unknown) &lt; &#39;JAN&#39; &lt; ... &lt; &#39;DEC&#39;</span><br><span class="line">  -h, --human-numeric-sort    使用易读性数字(例如： 2K 1G)</span><br><span class="line">  -n, --numeric-sort        根据字符串数值比较</span><br><span class="line">  -R, --random-sort        根据随机hash 排序</span><br><span class="line">      --random-source&#x3D;文件    从指定文件中获得随机字节</span><br><span class="line">  -r, --reverse            逆序输出排序结果</span><br><span class="line">      --sort&#x3D;WORD        按照WORD 指定的格式排序：</span><br><span class="line">                    一般数字-g，高可读性-h，月份-M，数字-n，</span><br><span class="line">                    随机-R，版本-V</span><br><span class="line">  -V, --version-sort        在文本内进行自然版本排序</span><br><span class="line"></span><br><span class="line">其他选项：</span><br><span class="line"></span><br><span class="line">      --batch-size&#x3D;NMERGE    一次最多合并NMERGE 个输入；如果输入更多</span><br><span class="line">                    则使用临时文件</span><br><span class="line">  -c, --check, --check&#x3D;diagnose-first    检查输入是否已排序，若已有序则不进行操作</span><br><span class="line">  -C, --check&#x3D;quiet, --check&#x3D;silent    类似-c，但不报告第一个无序行</span><br><span class="line">      --compress-program&#x3D;程序    使用指定程序压缩临时文件；使用该程序</span><br><span class="line">                    的-d 参数解压缩文件</span><br><span class="line">      --debug            为用于排序的行添加注释，并将有可能有问题的</span><br><span class="line">                    用法输出到标准错误输出</span><br><span class="line">      --files0-from&#x3D;文件    从指定文件读取以NUL 终止的名称，如果该文件被</span><br><span class="line">                    指定为&quot;-&quot;则从标准输入读文件名</span><br><span class="line">  -k, --key&#x3D;KEYDEF          sort via a key; KEYDEF gives location and type</span><br><span class="line">  -m, --merge               merge already sorted files; do not sort</span><br><span class="line">  -o, --output&#x3D;文件        将结果写入到文件而非标准输出</span><br><span class="line">  -s, --stable            禁用last-resort 比较以稳定比较算法</span><br><span class="line">  -S, --buffer-size&#x3D;大小    指定主内存缓存大小</span><br><span class="line">  -t, --field-separator&#x3D;分隔符    使用指定的分隔符代替非空格到空格的转换</span><br><span class="line">  -T, --temporary-directory&#x3D;目录    使用指定目录而非$TMPDIR 或&#x2F;tmp 作为</span><br><span class="line">                    临时目录，可用多个选项指定多个目录</span><br><span class="line">      --parallel&#x3D;N        将同时运行的排序数改变为N</span><br><span class="line">  -u, --unique        配合-c，严格校验排序；不配合-c，则只输出一次排序结果</span><br><span class="line">  -z, --zero-terminated    以0 字节而非新行作为行尾标志</span><br><span class="line">      --help        显示此帮助信息并退出</span><br><span class="line">      --version        显示版本信息并退出</span><br><span class="line"></span><br><span class="line">KEYDEF is F[.C][OPTS][,F[.C][OPTS]] for start and stop position, where F is a</span><br><span class="line">field number and C a character position in the field; both are origin 1, and</span><br><span class="line">the stop position defaults to the line&#39;s end.  If neither -t nor -b is in</span><br><span class="line">effect, characters in a field are counted from the beginning of the preceding</span><br><span class="line">whitespace.  OPTS is one or more single-letter ordering options [bdfgiMhnRrV],</span><br><span class="line">which override global ordering options for that key.  If no key is given, use</span><br><span class="line">the entire line as the key.</span><br><span class="line"></span><br><span class="line">SIZE may be followed by the following multiplicative suffixes:</span><br><span class="line">内存使用率% 1%，b 1、K 1024 (默认)，M、G、T、P、E、Z、Y 等依此类推。</span><br><span class="line"></span><br><span class="line">如果不指定文件，或者文件为&quot;-&quot;，则从标准输入读取数据。</span><br><span class="line"></span><br><span class="line">*** 警告 ***</span><br><span class="line">本地环境变量会影响排序结果。</span><br><span class="line">如果希望以字节的自然值获得最传统的排序结果，请设置LC_ALL&#x3D;C。</span><br><span class="line"></span><br><span class="line">GNU coreutils online help: &lt;http:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;coreutils&#x2F;&gt;</span><br><span class="line">请向&lt;http:&#x2F;&#x2F;translationproject.org&#x2F;team&#x2F;zh_CN.html&gt; 报告sort 的翻译错误</span><br><span class="line">要获取完整文档，请运行：info coreutils &#39;sort invocation&#39;</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure>
+<h2 id="man-sort"><a href="#man-sort" class="headerlink" title="man sort"></a>man sort</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">SORT(1)                                                                   FSF                                                                  SORT(1)</span><br><span class="line"></span><br><span class="line">NAME(名称)</span><br><span class="line">       sort - 对文本文件的行排序</span><br><span class="line"></span><br><span class="line">SYNOPSIS(总览)</span><br><span class="line">       ..&#x2F;src&#x2F;sort [OPTION]... [FILE]...</span><br><span class="line"></span><br><span class="line">DESCRIPTION(描述)</span><br><span class="line">       在这儿添加任何附加的描述信息</span><br><span class="line"></span><br><span class="line">       将排序好的所有文件串写到标准输出上.</span><br><span class="line"></span><br><span class="line">       +POS1 [-POS2]</span><br><span class="line">              从关键字POS1开始,到POS2*之前*结束(快过时了) 字段数和字符偏移量都从零开始计数(与-k选项比较)</span><br><span class="line"></span><br><span class="line">       -b     忽略排序字段或关键字中开头的空格</span><br><span class="line"></span><br><span class="line">       -c     检查是否指定文件已经排序好了,不排序.</span><br><span class="line"></span><br><span class="line">       -d     在关键字中只考虑[a-zA-Z0-9]字符.</span><br><span class="line"></span><br><span class="line">       -f     将关键字中的小写字母折合成大写字母.</span><br><span class="line"></span><br><span class="line">       -g     按照通常的数字值顺序作比较,暗含-b</span><br><span class="line"></span><br><span class="line">       -i     在关键字中只考虑[\040-\0176]字符.</span><br><span class="line"></span><br><span class="line">       -k POS1[,POS2]</span><br><span class="line">              从关键字POS1开始,*到*POS2结束.  字段数和字符偏移量都从1开始计数(与基于零的+POS格式作比较)</span><br><span class="line"></span><br><span class="line">       -l     按照当前环境排序.</span><br><span class="line"></span><br><span class="line">       -m     合并已经排序好的文件,不排序.</span><br><span class="line"></span><br><span class="line">       -M     按(未知的)&lt;&#96;JAN&#39;&lt;...&lt;&#96;DEC&#39;的顺序比较,暗含-b</span><br><span class="line"></span><br><span class="line">       -n     按照字符串的数值顺序比较,暗含-b</span><br><span class="line"></span><br><span class="line">       -o FILE</span><br><span class="line">              将结果写入FILE而不是标准输出.</span><br><span class="line"></span><br><span class="line">       -r     颠倒比较的结果.</span><br><span class="line"></span><br><span class="line">       -s     通过屏蔽最后的再分类比较来稳定排序.</span><br><span class="line"></span><br><span class="line">       -t SEP 使用SEP来替代空格的转换non-.</span><br><span class="line"></span><br><span class="line">       -T DIRECTORY</span><br><span class="line">              使用DIRECTORY作为临时文件,而不是$TMPDIR或者&#x2F;tmp</span><br><span class="line"></span><br><span class="line">       -u     如果有-c,则按严格的顺序进行检查; 如果有-m,则只输出相等顺序的第一个.</span><br><span class="line"></span><br><span class="line">       -z     以0字节结束行,而不是使用换行符,这是为了找到-print0</span><br><span class="line"></span><br><span class="line">       --help 显示帮助并退出.</span><br><span class="line"></span><br><span class="line">       --version</span><br><span class="line">              输出版本信息并退出.</span><br><span class="line"></span><br><span class="line">       -t SEP 使用SEP来替代空格的转换non-.</span><br><span class="line"></span><br><span class="line">       -T DIRECTORY</span><br><span class="line">              使用DIRECTORY作为临时文件,而不是$TMPDIR或者&#x2F;tmp</span><br><span class="line"></span><br><span class="line">       -u     如果有-c,则按严格的顺序进行检查; 如果有-m,则只输出相等顺序的第一个.</span><br><span class="line"></span><br><span class="line">       -z     以0字节结束行,而不是使用换行符,这是为了找到-print0</span><br><span class="line"></span><br><span class="line">       --help 显示帮助并退出.</span><br><span class="line"></span><br><span class="line">       --version</span><br><span class="line">              输出版本信息并退出.</span><br><span class="line"></span><br><span class="line">       POS为F[.C][OPTS],这里的F指的是字段数,而C为字段中的字符位置,这在-k中是从开</span><br><span class="line">       始计数的,而在过时的格式中是从零开始的.OPTS可由一个或多个Mbdfinr组成;这有效地屏蔽了</span><br><span class="line">       对于那个关键字的全局-Mbdfinr设置.如果没有指定关键字,则使用整行作为关键字.如 果没有FILE,或者FILE是-,则从标准输入读取.</span><br></pre></td></tr></table></figure>
+<h1 id="sort排序示例"><a href="#sort排序示例" class="headerlink" title="sort排序示例"></a>sort排序示例</h1><h2 id="sort-文件：默认排序-整行进行ASCII字符升序"><a href="#sort-文件：默认排序-整行进行ASCII字符升序" class="headerlink" title="sort 文件：默认排序( 整行进行ASCII字符升序)"></a>sort 文件：默认排序( 整行进行ASCII字符升序)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# cat sortFile.txt </span><br><span class="line">211</span><br><span class="line">121</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">[root@localhost Linux_Test]# sort sortFile.txt </span><br><span class="line">121</span><br><span class="line">211</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure>
+<h2 id="sort-c：检查是否已经排好序"><a href="#sort-c：检查是否已经排好序" class="headerlink" title="sort -c：检查是否已经排好序"></a>sort -c：检查是否已经排好序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# cat sortFile.txt </span><br><span class="line">211.123</span><br><span class="line">121.321</span><br><span class="line">54.9</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">1.234E10</span><br><span class="line">[root@localhost Linux_Test]# sort -c sortFile.txt </span><br><span class="line">sort：sortFile.txt:2：无序： 121.321</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure>
+<h2 id="sort-n：数字按照算术值大小排序"><a href="#sort-n：数字按照算术值大小排序" class="headerlink" title="sort -n：数字按照算术值大小排序"></a>sort -n：数字按照算术值大小排序</h2><p>-n 选项 Numberic 对于 数字按照算术值大小排序，而不是按照字符串比较<br>规则，例如 123 与 67<br>按算术值排序的话123比67大，如果按照字符串排序的话67比123大。</p>
+<h3 id="按字符串排序"><a href="#按字符串排序" class="headerlink" title="按字符串排序"></a>按字符串排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# vim sortFile.txt </span><br><span class="line">[root@localhost Linux_Test]# cat sortFile.txt </span><br><span class="line">211</span><br><span class="line">121</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">[root@localhost Linux_Test]# sort sortFile.txt </span><br><span class="line">121</span><br><span class="line">211</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure>
+<h2 id="sort-g：浮点数排序"><a href="#sort-g：浮点数排序" class="headerlink" title="sort -g：浮点数排序"></a>sort -g：浮点数排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# sort -n sortFile.txt </span><br><span class="line">1.234E10</span><br><span class="line">54</span><br><span class="line">54.9</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">121.321</span><br><span class="line">211.123</span><br><span class="line">[root@localhost Linux_Test]# sort -g sortFile.txt </span><br><span class="line">54</span><br><span class="line">54.9</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">121.321</span><br><span class="line">211.123</span><br><span class="line">1.234E10</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure>
+<h2 id="sort-n和sort-g的区别"><a href="#sort-n和sort-g的区别" class="headerlink" title="sort -n和sort -g的区别"></a>sort -n和sort -g的区别</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-g, --general-numeric-sort</span><br><span class="line">      compare according to general numerical value</span><br><span class="line">-n, --numeric-sort</span><br><span class="line">      compare according to string numerical value</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://stackoverflow.com/questions/1255782/whats-the-difference-between-general-numeric-sort-and-numeric-sort-options" target="_blank" rel="noopener">https://stackoverflow.com/questions/1255782/whats-the-difference-between-general-numeric-sort-and-numeric-sort-options</a></p>
+<ul>
+<li>通用数字排序（-g）将数字比较为浮点数，这可以采用科学记数法，例如1.234E10，但速度较慢并且容易出现舍入错误（1.2345678可能在1.2345679之后）.</li>
+<li>数字排序（-n）只是一种常规的字母排序，知道10在9之后。</li>
+</ul>
+</blockquote>
+<h3 id="按数值排序"><a href="#按数值排序" class="headerlink" title="按数值排序"></a>按数值排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# sort -n sortFile.txt </span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">121</span><br><span class="line">211</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure>
+<h2 id="sort-u：去除排序结果中的重复行"><a href="#sort-u：去除排序结果中的重复行" class="headerlink" title="sort -u：去除排序结果中的重复行"></a>sort -u：去除排序结果中的重复行</h2><p>它的作用很简单，就是在输出行中去除重复行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# cat sortFile.txt </span><br><span class="line">211</span><br><span class="line">121</span><br><span class="line">54</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">[root@localhost Linux_Test]# sort -n sortFile.txt </span><br><span class="line">54</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">121</span><br><span class="line">211</span><br><span class="line">[root@localhost Linux_Test]# sort -n -u sortFile.txt </span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">121</span><br><span class="line">211</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure></p>
+<h2 id="sort-r：降序排序"><a href="#sort-r：降序排序" class="headerlink" title="sort -r：降序排序"></a>sort -r：降序排序</h2><p>sort默认的排序方式是升序，如果想改成降序，就加个-r就搞定了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# cat sortFile.txt </span><br><span class="line">211</span><br><span class="line">121</span><br><span class="line">54</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">[root@localhost Linux_Test]# sort -n sortFile.txt </span><br><span class="line">54</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">121</span><br><span class="line">211</span><br><span class="line">[root@localhost Linux_Test]# sort -n -r sortFile.txt </span><br><span class="line">211</span><br><span class="line">121</span><br><span class="line">98</span><br><span class="line">87</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">65</span><br><span class="line">54</span><br><span class="line">54</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure></p>
+<h2 id="sort-o-文件：将结果写入到文件而非标准输出"><a href="#sort-o-文件：将结果写入到文件而非标准输出" class="headerlink" title="sort -o 文件：将结果写入到文件而非标准输出"></a>sort -o 文件：将结果写入到文件而非标准输出</h2><p>由于sort默认是把结果输出到标准输出，所以需要用重定向才能将结果写入文件，形如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort filename &gt; newfile</span><br></pre></td></tr></table></figure><br>但是，如果你想把排序结果输出到原文件中，用重定向可就不行了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# cat sortFile.txt </span><br><span class="line">98</span><br><span class="line">87</span><br><span class="line">65</span><br><span class="line">54</span><br><span class="line">32</span><br><span class="line">21</span><br><span class="line">[root@localhost Linux_Test]# sort sortFile.txt &gt;sortFile.txt </span><br><span class="line">[root@localhost Linux_Test]# cat sortFile.txt </span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure><br>可以看到，将文件排序后再重定向到该文件后，该文件的内容会被清空。<br>就在这个时候，-o选项出现了，它成功的解决了这个问题，让你放心的将结果写入原文件。这或许也是-o比重定向的唯一优势所在。</p>
+<h3 id="将原文件的内容排序后覆盖原文件"><a href="#将原文件的内容排序后覆盖原文件" class="headerlink" title="将原文件的内容排序后覆盖原文件"></a>将原文件的内容排序后覆盖原文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# vim sortFile.txt </span><br><span class="line">[root@localhost Linux_Test]# cat sortFile.txt </span><br><span class="line">98</span><br><span class="line">87</span><br><span class="line">65</span><br><span class="line">54</span><br><span class="line">32</span><br><span class="line">21</span><br><span class="line">[root@localhost Linux_Test]# sort sortFile.txt -o sortFile.txt </span><br><span class="line">[root@localhost Linux_Test]# cat sortFile.txt </span><br><span class="line">21</span><br><span class="line">32</span><br><span class="line">54</span><br><span class="line">65</span><br><span class="line">87</span><br><span class="line">98</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure>
+<p>如果想要指定排序的字段，则需要使用”-t”选项指定分隔符，并使用”-k”选项指定字段号。</p>
+<h2 id="sort-t：指定分隔符"><a href="#sort-t：指定分隔符" class="headerlink" title="sort -t：指定分隔符"></a>sort -t：指定分隔符</h2><p>默认分隔符是制表符；<br>对于特殊符号(如制表符)，可使用类似于-t$’\t’或-t’ctrl+v,tab’(先按ctrl+v，然后按tab键)的方法实现。</p>
+<h2 id="sort-k-n-m-：按照指定的字段范围排序。"><a href="#sort-k-n-m-：按照指定的字段范围排序。" class="headerlink" title="sort -k [n,m]：按照指定的字段范围排序。"></a>sort -k [n,m]：按照指定的字段范围排序。</h2><p>从第 n 个字段开始，到第 m 个字（默认到行尾）；<br>测试文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# cat ls_l_out.txt </span><br><span class="line">总用量 120</span><br><span class="line">-rw-r--r--. 1 root root    36 4月  24 13:44 cat_test.txt</span><br><span class="line">-rw-r--r--. 1 root root    30 4月  20 18:21 date_test.txt</span><br><span class="line">-rw-r--r--. 1 root root   592 4月  24 13:19 info_a.log</span><br><span class="line">-rw-r--r--. 1 root root   294 4月  23 14:14 less_test.txt</span><br><span class="line">-rw-r--r--. 1 root root     0 4月  26 15:44 ls_l_out.txt</span><br><span class="line">-rw-r--r--. 1 root root 75517 4月  23 14:21 man_less.txt</span><br><span class="line">-rw-r--r--. 1 root root     9 4月  22 16:47 more_test2.txt</span><br><span class="line">-rw-r--r--. 1 root root    23 4月  22 17:04 more_test3.txt</span><br><span class="line">-rw-r--r--. 1 root root    83 4月  22 17:19 more_test4.txt</span><br><span class="line">-rw-r--r--. 1 root root   294 4月  22 16:22 more_test.txt</span><br><span class="line">-rw-r--r--. 1 root root    48 4月  26 15:38 sortFile.txt</span><br><span class="line">-rw-r--r--. 1 root root    27 4月  14 01:48 vi_replaceAllTest.txt</span><br><span class="line">-rw-r--r--. 1 root root    36 4月  24 14:00 wc_test.txt</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure><br>按第5个字段进行排序：</p>
+<pre>
+[root@localhost Linux_Test]&#35; sort -k 5,5 ls_l_out.txt 
+总用量 120
+-rw-r--r--. 1 root root     <mark>0</mark> 4月  26 15:44 ls_l_out.txt
+-rw-r--r--. 1 root root    <mark>23</mark> 4月  22 17:04 more_test3.txt
+-rw-r--r--. 1 root root    <mark>27</mark> 4月  14 01:48 vi_replaceAllTest.txt
+-rw-r--r--. 1 root root   <mark>294</mark> 4月  22 16:22 more_test.txt
+-rw-r--r--. 1 root root   <mark>294</mark> 4月  23 14:14 less_test.txt
+-rw-r--r--. 1 root root    <mark>30</mark> 4月  20 18:21 date_test.txt
+-rw-r--r--. 1 root root    <mark>36</mark> 4月  24 13:44 cat_test.txt
+-rw-r--r--. 1 root root    <mark>36</mark> 4月  24 14:00 wc_test.txt
+-rw-r--r--. 1 root root    <mark>48</mark> 4月  26 15:38 sortFile.txt
+-rw-r--r--. 1 root root   <mark>592</mark> 4月  24 13:19 info_a.log
+-rw-r--r--. 1 root root <mark>75517</mark> 4月  23 14:21 man_less.txt
+-rw-r--r--. 1 root root    <mark>83</mark> 4月  22 17:19 more_test4.txt
+-rw-r--r--. 1 root root     <mark>9</mark> 4月  22 16:47 more_test2.txt
+[root@localhost Linux_Test]&#35; 
+</pre>
+
+
+<p>按第9个字段排序：</p>
+<pre>
+[root@localhost Linux_Test]&#35; sort -k 9,9 ls_l_out.txt 
+总用量 120
+-rw-r--r--. 1 root root    36 4月  24 13:44 <mark>cat_test.txt</mark>
+-rw-r--r--. 1 root root    30 4月  20 18:21 <mark>date_test.txt</mark>
+-rw-r--r--. 1 root root   592 4月  24 13:19 <mark>info_a.log</mark>
+-rw-r--r--. 1 root root   294 4月  23 14:14 <mark>less_test.txt</mark>
+-rw-r--r--. 1 root root     0 4月  26 15:44 <mark>ls_l_out.txt</mark>
+-rw-r--r--. 1 root root 75517 4月  23 14:21 <mark>man_less.txt</mark>
+-rw-r--r--. 1 root root     9 4月  22 16:47 <mark>more_test2.txt</mark>
+-rw-r--r--. 1 root root    23 4月  22 17:04 <mark>more_test3.txt</mark>
+-rw-r--r--. 1 root root    83 4月  22 17:19 <mark>more_test4.txt</mark>
+-rw-r--r--. 1 root root   294 4月  22 16:22 <mark>more_test.txt</mark>
+-rw-r--r--. 1 root root    48 4月  26 15:38 <mark>sortFile.txt</mark>
+-rw-r--r--. 1 root root    27 4月  14 01:48 <mark>vi_replaceAllTest.txt</mark>
+-rw-r--r--. 1 root root    36 4月  24 14:00 <mark>wc_test.txt</mark>
+[root@localhost Linux_Test]&#35;
+</pre>
+
+<p>当然，”-k”选项可以直接使用”-k 9”，代表从第三个字段到行尾都排序（第一个字段先排序，如果一致，则第二个字段再排序，直到行尾）。</p>
+<h2 id="sort-t-‘分隔符’-k-开始字段-结束字段"><a href="#sort-t-‘分隔符’-k-开始字段-结束字段" class="headerlink" title="sort -t ‘分隔符’ -k 开始字段,结束字段"></a>sort -t ‘分隔符’ -k 开始字段,结束字段</h2><p>测试文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost Linux_Test]# cat sort_t_k.txt </span><br><span class="line">bnana:30:5.5</span><br><span class="line">bnana:12:9.8</span><br><span class="line">apple:10:2.5</span><br><span class="line">pear:90:2.3</span><br><span class="line">orange:20:3.4</span><br><span class="line">[root@localhost Linux_Test]#</span><br></pre></td></tr></table></figure><br>这个文件有三列，列与列之间用冒号隔开了，第一列表示水果类型，第二列表示水果数量，第三列表示水果价格。</p>
+<p>那么我想以水果价格来排序，也就是以第3列来排序，如何利用sort实现？<br>幸好，sort提供了-t选项，后面可以设定间隔符。<br>指定了间隔符之后，就可以用-k来指定列数了。</p>
+<pre>
+[root@localhost Linux_Test]&#35; sort -t ':' -k 3,3 sort_t_k.txt 
+pear:90:<mark>2.3</mark>
+apple:10:<mark>2.5</mark>
+orange:20:<mark>3.4</mark>
+bnana:30:<mark>5.5</mark>
+bnana:12:<mark>9.8</mark>
+[root@localhost Linux_Test]&#35;
+</pre>
+
+<p>按第2列进行排序：</p>
+<pre>
+[root@localhost Linux_Test]&#35; sort -t ':' -k 2,2 sort_t_k.txt 
+apple:<mark>10</mark>:2.5
+bnana:<mark>12</mark>:9.8
+orange:<mark>20</mark>:3.4
+bnana:<mark>30</mark>:5.5
+pear:<mark>90</mark>:2.3
+[root@localhost Linux_Test]&#35; 
+</pre>
+按第1列到第2列进行排序
+<pre>
+[root@localhost Linux_Test]&#35; sort -t ':' -k 1,2 sort_t_k.txt 
+<mark>apple:10</mark>:2.5
+<mark>bnana:12</mark>:9.8
+<mark>bnana:30</mark>:5.5
+<mark>orange:20</mark>:3.4
+<mark>pear:90</mark>:2.3
+[root@localhost Linux_Test]&#35;
+</pre>
+
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://c.biancheng.net/view/996.html" target="_blank" rel="noopener">http://c.biancheng.net/view/996.html</a><br><a href="https://www.cnblogs.com/51linux/archive/2012/05/23/2515299.html" target="_blank" rel="noopener">https://www.cnblogs.com/51linux/archive/2012/05/23/2515299.html</a><br><a href="https://man.linuxde.net/sort" target="_blank" rel="noopener">https://man.linuxde.net/sort</a><br><a href="http://fancyerii.github.io/2019/06/15/sort/" target="_blank" rel="noopener">http://fancyerii.github.io/2019/06/15/sort/</a><br><a href="https://www.linuxidc.com/Linux/2017-08/146605.htm" target="_blank" rel="noopener">https://www.linuxidc.com/Linux/2017-08/146605.htm</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>蓝蓝</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tongsiying.github.io/blog/408c391b/" title="Linux sort命令">https://tongsiying.github.io/blog/408c391b/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！<br><strong><mark>如果图片无法显示</mark></strong>: <a href='https://lanlan2017.github.io/blog/9a6c2fdf/' target="_blank" rel="noopener">https://lanlan2017.github.io/blog/9a6c2fdf/</a></li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/3bb57d1c/" rel="next" title="Linux wc命令">
+                  <i class="fa fa-chevron-left"></i> Linux wc命令
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/blog/d9fc260f/" rel="prev" title="如何确保手机和电脑在同一网络下">
+                  如何确保手机和电脑在同一网络下 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-sort命令：对文本文件的行排序"><span class="nav-number">1.</span> <span class="nav-text">Linux sort命令：对文本文件的行排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sort选项"><span class="nav-number">1.1.</span> <span class="nav-text">sort选项:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-—help"><span class="nav-number">1.2.</span> <span class="nav-text">sort —help</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#man-sort"><span class="nav-number">1.3.</span> <span class="nav-text">man sort</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sort排序示例"><span class="nav-number">2.</span> <span class="nav-text">sort排序示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-文件：默认排序-整行进行ASCII字符升序"><span class="nav-number">2.1.</span> <span class="nav-text">sort 文件：默认排序( 整行进行ASCII字符升序)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-c：检查是否已经排好序"><span class="nav-number">2.2.</span> <span class="nav-text">sort -c：检查是否已经排好序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-n：数字按照算术值大小排序"><span class="nav-number">2.3.</span> <span class="nav-text">sort -n：数字按照算术值大小排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按字符串排序"><span class="nav-number">2.3.1.</span> <span class="nav-text">按字符串排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-g：浮点数排序"><span class="nav-number">2.4.</span> <span class="nav-text">sort -g：浮点数排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-n和sort-g的区别"><span class="nav-number">2.5.</span> <span class="nav-text">sort -n和sort -g的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按数值排序"><span class="nav-number">2.5.1.</span> <span class="nav-text">按数值排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-u：去除排序结果中的重复行"><span class="nav-number">2.6.</span> <span class="nav-text">sort -u：去除排序结果中的重复行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-r：降序排序"><span class="nav-number">2.7.</span> <span class="nav-text">sort -r：降序排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-o-文件：将结果写入到文件而非标准输出"><span class="nav-number">2.8.</span> <span class="nav-text">sort -o 文件：将结果写入到文件而非标准输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将原文件的内容排序后覆盖原文件"><span class="nav-number">2.8.1.</span> <span class="nav-text">将原文件的内容排序后覆盖原文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-t：指定分隔符"><span class="nav-number">2.9.</span> <span class="nav-text">sort -t：指定分隔符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-k-n-m-：按照指定的字段范围排序。"><span class="nav-number">2.10.</span> <span class="nav-text">sort -k [n,m]：按照指定的字段范围排序。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-t-‘分隔符’-k-开始字段-结束字段"><span class="nav-number">2.11.</span> <span class="nav-text">sort -t ‘分隔符’ -k 开始字段,结束字段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/avatar.gif"
+      alt="蓝蓝">
+  <p class="site-author-name" itemprop="name">蓝蓝</p>
+  <div class="site-description" itemprop="description">先看视频再看书</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/%20%7C%7C%20archive">
+        
+          <span class="site-state-item-count">456</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/%20%7C%7C%20th">
+          
+        
+        <span class="site-state-item-count">168</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/lanlan2017" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;lanlan2017" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/ReadingNotes/" title="ReadingNotes &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;ReadingNotes&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>ReadingNotes</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/" title="blog &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>blog</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/tools/" title="tools &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;tools&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-wrench"></i>tools</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">蓝蓝</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/blog/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+
+<script src="/blog/js/next-boot.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/bookmark.js?v=7.4.1.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+<script src="/blog/js/local-search.js?v=7.4.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KVtEjXUX9wDimI183iDfg6tK-MdYXbMMI',
+    appKey: 'mvmFgKF86C8Pi79KfVeFgzys',
+    placeholder: '在这里输入评论',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>

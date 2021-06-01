@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=7.4.1" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="_Sly-yzHYmALHXzjFpPWsodMrjBSphw7bfRbMUH80Qc">
+  <meta name="msvalidate.01" content="B1CFD346B8DEBBFE0C983C2AF8955531">
+  <meta name="baidu-site-verification" content="vkMTwK56xr">
+
+<link rel="stylesheet" href="/blog/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"flat"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="ntpdate&amp;nbsp;NTP协议&amp;nbsp;NTP是什么&amp;nbsp;NTP实现什么目的&amp;nbsp;NTP服务器列表&amp;nbsp;1、阿里云授时服务器&amp;nbsp;2、国内大学授时服务器&amp;nbsp;3、国外授时服务器&amp;nbsp;查询时间ntpdate -q NTP服务器&amp;nbsp;设置时间ntpdate NTP服务器&amp;nbsp;参考资料&amp;nbsp; .header_1{margin-left: 1e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux ntpdate命令">
+<meta property="og:url" content="https://tongsiying.github.io/blog/8923c382/index.html">
+<meta property="og:site_name" content="蓝蓝博客">
+<meta property="og:description" content="ntpdate&amp;nbsp;NTP协议&amp;nbsp;NTP是什么&amp;nbsp;NTP实现什么目的&amp;nbsp;NTP服务器列表&amp;nbsp;1、阿里云授时服务器&amp;nbsp;2、国内大学授时服务器&amp;nbsp;3、国外授时服务器&amp;nbsp;查询时间ntpdate -q NTP服务器&amp;nbsp;设置时间ntpdate NTP服务器&amp;nbsp;参考资料&amp;nbsp; .header_1{margin-left: 1e">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-20T13:10:13.000Z">
+<meta property="article:modified_time" content="2021-04-20T15:07:47.000Z">
+<meta property="article:author" content="蓝蓝">
+<meta property="article:tag" content="程序员">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="读书">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="批处理">
+<meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://tongsiying.github.io/blog/8923c382/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Linux ntpdate命令 | 蓝蓝博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蓝蓝博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/blog/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-dir">
+      
+    
+
+    <a href="/blog/dir/" rel="section"><i class="fa fa-fw fa-sitemap"></i>目录</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-links">
+      
+    
+
+    <a href="/blog/links/" rel="section"><i class="fa fa-fw fa-link"></i>链接</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/lanlan2017" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://tongsiying.github.io/blog/blog/8923c382/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="蓝蓝">
+      <meta itemprop="description" content="先看视频再看书">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蓝蓝博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">Linux ntpdate命令
+
+          
+        </h2>
+
+        <div class="post-meta">
+          <!-- 置顶插件添加 开始 -->
+          
+          <!-- 置顶插件添加 结束 -->
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-04-20 21:10:13 / 修改时间：23:07:47" itemprop="dateCreated datePublished" datetime="2021-04-20T21:10:13+08:00">2021-04-20</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">通用</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/%E7%BC%96%E7%A8%8B/Linux/%E9%80%9A%E7%94%A8/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%97%A5%E5%8E%86/" itemprop="url" rel="index"><span itemprop="name">日期时间日历</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/blog/8923c382/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/blog/8923c382/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><div id='my_toc'><a href="/blog/8923c382/#ntpdate" class="header_1">ntpdate</a>&nbsp;<br><a href="/blog/8923c382/#NTP协议" class="header_2">NTP协议</a>&nbsp;<br><a href="/blog/8923c382/#NTP是什么" class="header_3">NTP是什么</a>&nbsp;<br><a href="/blog/8923c382/#NTP实现什么目的" class="header_3">NTP实现什么目的</a>&nbsp;<br><a href="/blog/8923c382/#NTP服务器列表" class="header_3">NTP服务器列表</a>&nbsp;<br><a href="/blog/8923c382/#1、阿里云授时服务器" class="header_4">1、阿里云授时服务器</a>&nbsp;<br><a href="/blog/8923c382/#2、国内大学授时服务器" class="header_4">2、国内大学授时服务器</a>&nbsp;<br><a href="/blog/8923c382/#3、国外授时服务器" class="header_4">3、国外授时服务器</a>&nbsp;<br><a href="/blog/8923c382/#查询时间ntpdate-q-NTP服务器" class="header_2">查询时间ntpdate -q NTP服务器</a>&nbsp;<br><a href="/blog/8923c382/#设置时间ntpdate-NTP服务器" class="header_2">设置时间ntpdate NTP服务器</a>&nbsp;<br><a href="/blog/8923c382/#参考资料" class="header_1">参考资料</a>&nbsp;<br></div></p>
+<p><style>.header_1{margin-left: 1em;}.header_2{margin-left: 2em;}.header_3{margin-left: 3em;}.header_4{margin-left: 4em;}.header_5{margin-left: 5em;}.header_6{margin-left: 6em;}</style><br><a id="more"></a></p>
+<script>if (navigator.platform.search('arm')==-1){document.getElementById('my_toc').style.display = 'none';}var e,p = document.getElementsByTagName('p');while (p.length>0) {e = p[0];e.parentElement.removeChild(e);}</script>
+
+<!--end-->
+<h1 id="ntpdate"><a href="#ntpdate" class="headerlink" title="ntpdate"></a>ntpdate</h1><h2 id="NTP协议"><a href="#NTP协议" class="headerlink" title="NTP协议"></a>NTP协议</h2><h3 id="NTP是什么"><a href="#NTP是什么" class="headerlink" title="NTP是什么"></a>NTP是什么</h3><p>NTP 是网络时间协议（Network Time Protocol），它用来同步网络设备【如计算机、手机】的时间的协议。</p>
+<h3 id="NTP实现什么目的"><a href="#NTP实现什么目的" class="headerlink" title="NTP实现什么目的"></a>NTP实现什么目的</h3><p>目的很简单，就是为了提供准确时间。因为我们的手表、手机、电脑等设备，经常会跑着跑着时间就出现了误差，或快或慢的少几秒，时间长了甚至误差过分钟。</p>
+<h3 id="NTP服务器列表"><a href="#NTP服务器列表" class="headerlink" title="NTP服务器列表"></a>NTP服务器列表</h3><p>Windows系统上自带的两个：time.windows.com 和 time.nist.gov<br>MacOS上自带的两个：time.apple.com 和 time.asia.apple.com<br>NTP授时快速域名服务：cn.ntp.org.cn</p>
+<h4 id="1、阿里云授时服务器"><a href="#1、阿里云授时服务器" class="headerlink" title="1、阿里云授时服务器"></a>1、阿里云授时服务器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#NTP服务器</span><br><span class="line">ntp.aliyun.com</span><br><span class="line">ntp1.aliyun.com</span><br><span class="line">ntp2.aliyun.com</span><br><span class="line">ntp3.aliyun.com</span><br><span class="line">ntp4.aliyun.com</span><br><span class="line">ntp5.aliyun.com</span><br><span class="line">ntp6.aliyun.com</span><br><span class="line">ntp7.aliyun.com</span><br><span class="line">#Time服务器</span><br><span class="line">time1.aliyun.com</span><br><span class="line">time2.aliyun.com</span><br><span class="line">time3.aliyun.com</span><br><span class="line">time4.aliyun.com</span><br><span class="line">time5.aliyun.com</span><br><span class="line">time6.aliyun.com</span><br><span class="line">time7.aliyun.com</span><br></pre></td></tr></table></figure>
+<h4 id="2、国内大学授时服务器"><a href="#2、国内大学授时服务器" class="headerlink" title="2、国内大学授时服务器"></a>2、国内大学授时服务器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s1c.time.edu.cn       北京大学</span><br><span class="line">s2m.time.edu.cn       北京大学</span><br><span class="line">s1b.time.edu.cn       清华大学</span><br><span class="line">s1e.time.edu.cn       清华大学</span><br><span class="line">s2a.time.edu.cn       清华大学</span><br><span class="line">s2b.time.edu.cn       清华大学</span><br></pre></td></tr></table></figure>
+<h4 id="3、国外授时服务器"><a href="#3、国外授时服务器" class="headerlink" title="3、国外授时服务器"></a>3、国外授时服务器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#苹果提供的授时服务器   </span><br><span class="line">time1.apple.com</span><br><span class="line">time2.apple.com</span><br><span class="line">time3.apple.com</span><br><span class="line">time4.apple.com</span><br><span class="line">time5.apple.com</span><br><span class="line">time6.apple.com</span><br><span class="line">time7.apple.com</span><br><span class="line"></span><br><span class="line">#Google提供的授时服务器   </span><br><span class="line">time1.google.com</span><br><span class="line">time2.google.com</span><br><span class="line">time3.google.com</span><br><span class="line">time4.google.com</span><br></pre></td></tr></table></figure>
+<p>通过 NTP 协议校对系统时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate</span><br></pre></td></tr></table></figure><br>如果没有安装ntpdate,查找安装包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list ntpdate</span><br></pre></td></tr></table></figure><br>安装ntpdate:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install ntpdate</span><br></pre></td></tr></table></figure><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum list ntpdate</span><br><span class="line">已加载插件：fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line">可安装的软件包</span><br><span class="line">ntpdate.aarch64                                                              4.2.6p5-29.el7.centos.2                                                               base</span><br><span class="line">[root@localhost ~]# yum install ntpdate</span><br><span class="line">已加载插件：fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line">正在解决依赖关系</span><br><span class="line">--&gt; 正在检查事务</span><br><span class="line">---&gt; 软件包 ntpdate.aarch64.0.4.2.6p5-29.el7.centos.2 将被 安装</span><br><span class="line">--&gt; 解决依赖关系完成</span><br><span class="line"></span><br><span class="line">依赖关系解决</span><br><span class="line">......</span><br></pre></td></tr></table></figure></p>
+<h2 id="查询时间ntpdate-q-NTP服务器"><a href="#查询时间ntpdate-q-NTP服务器" class="headerlink" title="查询时间ntpdate -q NTP服务器"></a>查询时间ntpdate -q NTP服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate -q 0.pool.ntp.org</span><br></pre></td></tr></table></figure>
+<p>运行效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ntpdate -q 0.pool.ntp.org</span><br><span class="line">server 139.199.214.202, stratum 2, offset 0.225052, delay 0.06584</span><br><span class="line">server 162.159.200.1, stratum 0, offset 0.000000, delay 0.00000</span><br><span class="line">server 185.209.85.222, stratum 2, offset 0.224910, delay 0.31339</span><br><span class="line">server 5.79.108.34, stratum 3, offset 0.219270, delay 0.26381</span><br><span class="line">20 Apr 21:32:30 ntpdate[22284]: adjust time server 139.199.214.202 offset 0.225052 sec</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure><br>使用阿里云<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate -q ntp.aliyun.com</span><br></pre></td></tr></table></figure><br>运行效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ntpdate -q ntp.aliyun.com</span><br><span class="line">server 203.107.6.88, stratum 2, offset 0.210540, delay 0.09094</span><br><span class="line">20 Apr 21:33:05 ntpdate[22518]: adjust time server 203.107.6.88 offset 0.210540 sec</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure><br>运行效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ntpdate -q cn.ntp.org.cn</span><br><span class="line">server 2001:da8:9000::130, stratum 1, offset 0.257669, delay 0.10617</span><br><span class="line">server 2001:da8:9000::81, stratum 1, offset 0.256599, delay 0.10426</span><br><span class="line">server 111.230.50.201, stratum 3, offset 0.266627, delay 0.05635</span><br><span class="line">server 120.25.115.20, stratum 2, offset 0.263829, delay 0.05809</span><br><span class="line">server 203.107.6.88, stratum 2, offset 0.267893, delay 0.08539</span><br><span class="line">server 182.92.12.11, stratum 2, offset 0.264843, delay 0.08183</span><br><span class="line">server 120.25.108.11, stratum 2, offset 0.263255, delay 0.05913</span><br><span class="line">server 120.197.116.202, stratum 1, offset 0.257536, delay 0.08014</span><br><span class="line">server 119.29.26.206, stratum 3, offset 0.262630, delay 0.05463</span><br><span class="line">server 106.75.185.63, stratum 2, offset 0.262619, delay 0.05322</span><br><span class="line">server 223.113.120.195, stratum 3, offset 0.259761, delay 0.07321</span><br><span class="line">server 223.113.97.98, stratum 0, offset 0.000000, delay 0.00000</span><br><span class="line">server 223.65.211.46, stratum 0, offset 0.000000, delay 0.00000</span><br><span class="line">server 36.154.179.82, stratum 5, offset 0.260445, delay 0.07410</span><br><span class="line">server 223.113.103.191, stratum 3, offset 0.182134, delay 0.07329</span><br><span class="line">server 58.220.133.132, stratum 3, offset 0.264724, delay 0.08644</span><br><span class="line">server 114.67.237.130, stratum 2, offset 0.261922, delay 0.08417</span><br><span class="line">server 114.67.103.73, stratum 0, offset 0.000000, delay 0.00000</span><br><span class="line">server 140.143.99.185, stratum 3, offset 0.266090, delay 0.06126</span><br><span class="line">20 Apr 21:31:13 ntpdate[21731]: adjust time server 120.197.116.202 offset 0.257536 sec</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure></p>
+<h2 id="设置时间ntpdate-NTP服务器"><a href="#设置时间ntpdate-NTP服务器" class="headerlink" title="设置时间ntpdate NTP服务器"></a>设置时间ntpdate NTP服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate ntp.aliyun.com</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ntpdate ntp.aliyun.com</span><br><span class="line">20 Apr 21:39:16 ntpdate[25139]: adjust time server 203.107.6.88 offset 0.026031 sec</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.jianshu.com/p/28864ab7fdd9" target="_blank" rel="noopener">https://www.jianshu.com/p/28864ab7fdd9</a></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>蓝蓝</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://tongsiying.github.io/blog/8923c382/" title="Linux ntpdate命令">https://tongsiying.github.io/blog/8923c382/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！<br><strong><mark>如果图片无法显示</mark></strong>: <a href='https://lanlan2017.github.io/blog/9a6c2fdf/' target="_blank" rel="noopener">https://lanlan2017.github.io/blog/9a6c2fdf/</a></li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/blog/4afae6e5/" rel="next" title="Linux date命令">
+                  <i class="fa fa-chevron-left"></i> Linux date命令
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/blog/69afcd3b/" rel="prev" title="Linux cal命令打印日历">
+                  Linux cal命令打印日历 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ntpdate"><span class="nav-number">1.</span> <span class="nav-text">ntpdate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NTP协议"><span class="nav-number">1.1.</span> <span class="nav-text">NTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NTP是什么"><span class="nav-number">1.1.1.</span> <span class="nav-text">NTP是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NTP实现什么目的"><span class="nav-number">1.1.2.</span> <span class="nav-text">NTP实现什么目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NTP服务器列表"><span class="nav-number">1.1.3.</span> <span class="nav-text">NTP服务器列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、阿里云授时服务器"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">1、阿里云授时服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、国内大学授时服务器"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">2、国内大学授时服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、国外授时服务器"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">3、国外授时服务器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询时间ntpdate-q-NTP服务器"><span class="nav-number">1.2.</span> <span class="nav-text">查询时间ntpdate -q NTP服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置时间ntpdate-NTP服务器"><span class="nav-number">1.3.</span> <span class="nav-text">设置时间ntpdate NTP服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/blog/images/avatar.gif"
+      alt="蓝蓝">
+  <p class="site-author-name" itemprop="name">蓝蓝</p>
+  <div class="site-description" itemprop="description">先看视频再看书</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/blog/archives/%20%7C%7C%20archive">
+        
+          <span class="site-state-item-count">456</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/blog/categories/%20%7C%7C%20th">
+          
+        
+        <span class="site-state-item-count">168</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/lanlan2017" title="GitHub &amp;rarr; https:&#x2F;&#x2F;github.com&#x2F;lanlan2017" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/ReadingNotes/" title="ReadingNotes &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;ReadingNotes&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>ReadingNotes</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/" title="blog &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>blog</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://lanlan2017.github.io/blog/tools/" title="tools &amp;rarr; https:&#x2F;&#x2F;lanlan2017.github.io&#x2F;blog&#x2F;tools&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-wrench"></i>tools</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/blog/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">蓝蓝</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.1</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+<script src="/blog/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+
+<script src="/blog/js/next-boot.js?v=7.4.1.js"></script>
+
+<script src="/blog/js/bookmark.js?v=7.4.1.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+<script src="/blog/js/local-search.js?v=7.4.1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KVtEjXUX9wDimI183iDfg6tK-MdYXbMMI',
+    appKey: 'mvmFgKF86C8Pi79KfVeFgzys',
+    placeholder: '在这里输入评论',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
